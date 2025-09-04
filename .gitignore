@@ -335,6 +335,6 @@ FodyWeavers.xsd
 *.msm
 *.msp
 .idea/
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.users
+#*.vcxproj
+#*.vcxproj.filters
+#*.vcxproj.users
