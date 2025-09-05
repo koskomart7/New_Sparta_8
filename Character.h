@@ -60,16 +60,16 @@ public:
 
     void addExp(int amount) { exp += amount; }
     bool canLevelUp() const { return exp >= EXP_FOR_LEVELUP && level < MAX_LEVEL; }
-    void levelUp() {}; 
+    void levelUp(); 
 
 
     void takeDamage(int damage);
-    void heal(int amount) {};
+    void heal(int amount); 
     int dealDamage() const { return attack; }
 
 
     void addGold(int amount) { gold += amount; }
-    bool spendGold(int amount) {};
+    bool spendGold(int amount) {};  //
 
 
     void addItem(const Item* item) {};  // TEMP {}
@@ -78,15 +78,15 @@ public:
         return !inventory.empty();
     }
     //void displayInventory() const;
-    bool useRandomItem() {};
+    bool useRandomItem() {};  //
     bool sellItem(int index, vector<Item*> Inventory) {};  // Modified with a parameter vector inventory
 
     const vector<Item*> getInventory() const { return inventory; }
 
 private:
-    void updateMaxHealth() {};
-    void updateAttack() {};
-
+    void updateMaxHealth();
+    void updateAttack();
+    void validateAndUpdateStats();
 };
 
 #endif 
