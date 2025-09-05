@@ -61,6 +61,7 @@
       <Filter>소스 파일\Items</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
+	</ClCompile>
     <ClCompile Include="Shop.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
