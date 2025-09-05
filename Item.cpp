@@ -1,9 +1,9 @@
 #include "Item.h"
 
-Item::Item(int price, string name)
+Item::Item()
 {
-	this->price = price;
-	this->name = name;
+	this->price = 0;
+	this->name = "";
 }
 
 int Item::getPrice() const
