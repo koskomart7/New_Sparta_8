@@ -8,3 +8,29 @@ Character::Character(const string& characterName)
 {
 	
 }
+
+//setter function
+
+void Character::setName(const string& PlayerName)
+{
+}
+
+void Character::setLevel(int lvl)
+{
+}
+
+void Character::setCurrentHealth(int newHealth)
+{
+}
+
+void Character::setAttack(int newAttack)
+{
+}
+
+void Character::setExp(int newExp)
+{
+}
+
+void Character::setGold(int newGold)
+{
+}
