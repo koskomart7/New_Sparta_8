@@ -129,8 +129,7 @@ void GameManager::bossBattle()
 
 void GameManager::displayInv() const
 {
-	// displayInv Logic
-	vector<Item> inv = player->getInventory();
+	vector<Item*> inv = player->getInventory();
 
 	cout << "===== Inventory ===== \n" << endl;
 
@@ -143,7 +142,7 @@ void GameManager::displayInv() const
 	{
 		for (auto invIt : inv) 
 		{
-			cout << invIt.getName() << endl;
+			cout << invIt->getName() << endl;
 		}
 	}
 
