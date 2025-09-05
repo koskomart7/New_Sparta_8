@@ -11,9 +11,11 @@ public:
 
 	void bossBattle(Character* player);
 
-	void displayStats(Character* player);
+	void displayStats(Character& player) const;
 
-	void displayInv(Character* player);
+	void displayInv(Character& player) const;
 
 	void shopping(Character* player);
 };
+
+int callMainMenu();

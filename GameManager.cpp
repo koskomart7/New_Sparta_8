@@ -112,12 +112,12 @@ void GameManager::bossBattle(Character* player)
 	//Monster boss;
 }
 
-void GameManager::displayInv(Character* player)
+void GameManager::displayInv(Character& player) const
 {
 	// displayInv Logic
 }
 
-void GameManager::displayStats(Character* player)
+void GameManager::displayStats(Character& player) const
 {
 	// displayStats Logic
 }
@@ -125,4 +125,29 @@ void GameManager::displayStats(Character* player)
 void GameManager::shopping(Character* player)
 {
 	// shop
+}
+
+int callMainMenu() {
+	int selection;
+
+	while (true) {
+		std::cout << "===== ⚗️ Main Menu =====\n" << std::endl;
+		std::cout << "1. Player Menu" << std::endl;
+		std::cout << "2. Raid Dungeon" << std::endl;
+		std::cout << "3. Visit Shop" << std::endl;
+		std::cout << "4. Exit\n" << std::endl;
+		std::cout << "Enter selection : ";
+
+		std::cin >> selection;
+
+		if (std::cin.fail() || (selection < 0 || selection > 4)) {
+			std::cout << " invalid input." << std::endl;
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+		}
+		else {
+			return selection;
+		}
+		system("cls");
+	}
 }
