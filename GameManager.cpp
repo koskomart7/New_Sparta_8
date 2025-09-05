@@ -129,8 +129,7 @@ void GameManager::bossBattle()
 
 void GameManager::displayInv() const
 {
-	// displayInv Logic
-	vector<Item> inv = player->getInventory();
+	vector<Item*> inv = player->getInventory();
 
 	cout << "===== Inventory ===== \n" << endl;
 
@@ -143,7 +142,7 @@ void GameManager::displayInv() const
 	{
 		for (auto invIt : inv) 
 		{
-			cout << invIt.getName() << endl;
+			cout << invIt->getName() << endl;
 		}
 	}
 
@@ -153,7 +152,15 @@ void GameManager::displayInv() const
 
 void GameManager::displayStats() const
 {
-	// displayStats Logic
+	cout << "===== Character Stats =====\n" << endl;
+	cout << "Name : " << player->getName() << endl;
+	cout << "Level : " << player->getLevel() << endl;
+	cout << "Exp : " << player->getExp() << endl;
+	cout << "Health : " << player->getMaxHealth() << endl;
+	cout << "Attack : " << player->getAttack() << "\n" << endl;
+
+	system("pause");
+	system("cls");
 }
 
 void GameManager::shopping()
@@ -191,7 +198,7 @@ Character* characterCreation()
 	cout << "Level : " << player->getLevel() << endl;
 	cout << "Exp : " << player->getExp() << endl;
 	cout << "Health : " << player->getMaxHealth() << endl;
-	cout << "Attack : " << player->getAttack() << endl;
+	cout << "Attack : " << player->getAttack() << "\n" << endl;
 
 	system("pause");
 	system("cls");
@@ -257,7 +264,7 @@ void callPlayerMenu(GameManager& game)
 			switch (selection)
 			{
 			case 1:
-				//game.displayStats();
+				game.displayStats();
 				break;
 			case 2:
 				game.displayInv();
