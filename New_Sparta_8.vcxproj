@@ -123,7 +123,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BossMonster.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="New_Sparta_8.cpp" />
+    <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="Troll.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BossMonster.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Goblin.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Orc.h" />
+    <ClInclude Include="Troll.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
