@@ -20,7 +20,7 @@ struct Item
 class Character
 {
 private:
-    std::string name;
+    string name;
     int level;
     int currentHealth;
     int maxHealth;
@@ -45,7 +45,14 @@ public:
     int getGold() const { return gold; }
 
     //setter fuction
-
+    void setName(const string& PlayerName);
+    void setLevel(int lvl);
+    void setCurrentHealth(int CurrentHP);
+    void setAttack(int newAttack);
+    void setExp(int newExp);
+    void setGold(int amount);
+    
+   
 
     void displayStatus() const;
     bool isAlive() const { return currentHealth > 0; }
