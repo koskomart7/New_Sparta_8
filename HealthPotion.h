@@ -7,6 +7,6 @@ private:
 	int healthRestore;
 
 public:
-	HealthPotion(int healthRestore = 50);
+	HealthPotion(int healthRestore = 50, int price = 50, string name = "HealthPotion");
 	void Use(Character* character) override;
 };

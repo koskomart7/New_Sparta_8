@@ -1,8 +1,8 @@
 #include "AttackBoost.h"
 
-AttackBoost::AttackBoost(int attackIncrease)
+
+AttackBoost::AttackBoost(int attackIncrease, int price, string name) : Item(price, name)
 {
-	this->name = "AttackBoost";
 	this->attackIncrease = attackIncrease;
 }
 

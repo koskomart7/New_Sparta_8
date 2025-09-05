@@ -19,6 +19,12 @@
     <Filter Include="소스 파일\Monsters">
       <UniqueIdentifier>{88e08dd3-0702-4144-8913-a26207772dac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Items">
+      <UniqueIdentifier>{b0f82abb-1c3a-461d-b67f-0d023eaf7e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Items">
+      <UniqueIdentifier>{a5622b6c-ca7c-4d40-9008-7c67544ea934}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="New_Sparta_8.cpp">
@@ -42,6 +48,15 @@
     <ClCompile Include="BossMonster.cpp">
       <Filter>소스 파일\Monsters</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackBoost.cpp">
+      <Filter>소스 파일\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>소스 파일\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -61,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="BossMonster.h">
       <Filter>헤더 파일\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>헤더 파일\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBoost.h">
+      <Filter>헤더 파일\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPotion.h">
+      <Filter>헤더 파일\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

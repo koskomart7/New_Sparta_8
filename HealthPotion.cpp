@@ -1,8 +1,7 @@
 #include "HealthPotion.h"
 
-HealthPotion::HealthPotion(int healthRestore)
+HealthPotion::HealthPotion(int healthRestore, int price, string name) : Item(price, name)
 {
-	this->name = "HealthPotion";
 	this->healthRestore = healthRestore;
 }
 
