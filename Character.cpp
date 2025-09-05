@@ -172,6 +172,8 @@ void Character::takeDamage(int damage)
 
 void Character::heal(int amount)
 {
+    /*int healedAmount = min(amount, maxHealth - currentHealth);
+    currentHealth += healedAmount;*/
 
 }
 
