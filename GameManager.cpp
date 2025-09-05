@@ -4,6 +4,7 @@
 
 #include "rangeRd.h"
 #include "GameManager.h"
+#include "Item.h"
 #include "Character.h"
 #include "Monster.h"
 #include "Goblin.h"
@@ -129,6 +130,25 @@ void GameManager::bossBattle()
 void GameManager::displayInv() const
 {
 	// displayInv Logic
+	vector<Item> inv = player->getInventory();
+
+	cout << "===== Inventory ===== \n" << endl;
+
+	if (inv.empty()) 
+	{
+		cout << "There's nothing in the inventory.\n" << endl;
+	}
+
+	else
+	{
+		for (auto invIt : inv) 
+		{
+			cout << invIt.getName() << endl;
+		}
+	}
+
+	system("pause");
+	system("cls");
 }
 
 void GameManager::displayStats() const
@@ -205,6 +225,50 @@ int callMainMenu()
 		else 
 		{
 			return selection;
+		}
+	}
+}
+
+void callPlayerMenu(GameManager& game)
+{
+	int selection;
+
+	while (true)
+	{
+		cout << "===== Player Menu =====\n" << endl;
+		cout << "1. Show Stats" << endl;
+		cout << "2. Inventory" << endl;
+		cout << "3. Return\n" << endl;
+		cout << "Enter selection : ";
+
+		cin >> selection;
+
+		system("cls");
+
+		if (cin.fail() || (selection < 0 || selection > 3))
+		{
+			cout << " invalid input." << endl;
+			cin.clear();
+			cin.ignore(10000, '\n');
+		}
+
+		else
+		{
+			switch (selection)
+			{
+			case 1:
+				//game.displayStats();
+				break;
+			case 2:
+				game.displayInv();
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (selection == 3) {
+			break;
 		}
 	}
 }

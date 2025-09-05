@@ -8,12 +8,12 @@ HealthPotion::HealthPotion(int healthRestore, int price, string name)
 	this->name = name;
 }
 
-void HealthPotion::Use(Character* character)
-{
-	//character hp 50 add
-}
-
-void HealthPotion::ItemEffect()
-{
-	cout << "ItemEffect : health increased " << healthRestore << endl;
-}
+//void HealthPotion::Use(Character* character)
+//{
+//	//character hp 50 add
+//}
+//
+//void HealthPotion::ItemEffect()
+//{
+//	cout << "ItemEffect : health increased " << healthRestore << endl;
+//}

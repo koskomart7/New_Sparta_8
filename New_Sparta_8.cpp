@@ -20,7 +20,7 @@ int main()
         switch (selection)
         {
         case 1:
-            // player menu here
+            callPlayerMenu(game);
             break;
         case 2:
             // battle here

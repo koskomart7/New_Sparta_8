@@ -28,3 +28,5 @@ public:
 Character* characterCreation();
 
 int callMainMenu();
+
+void callPlayerMenu(GameManager&);
