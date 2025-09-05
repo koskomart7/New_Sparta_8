@@ -49,7 +49,7 @@ void GameManager::battle(Character* player)
 	int turns = 0, targetIdx = 0, enemySize = 0;
 	vector<Monster*> enemy;
 
-	for (int i = 0; i < 3; i++) // will make it random(1 ~ 3) later.
+	for (int i = 0; i < randomRange(1, 3); i++)
 	{
 		enemy.push_back(spawnMonsters(player));
 	}
