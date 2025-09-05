@@ -18,4 +18,6 @@ public:
 	void shopping(Character* player);
 };
 
+//Character* characterCreation(string name);
+
 int callMainMenu();

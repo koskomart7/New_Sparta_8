@@ -127,27 +127,56 @@ void GameManager::shopping(Character* player)
 	// shop
 }
 
-int callMainMenu() {
+//Character* characterCreation() 
+//{
+//	string name;
+//
+//	while(true)
+//	{
+//		cout << "===== Create Character =====\n" << endl;
+//		cout << "Enter name : ";
+//
+//		getline(cin, name);
+//		system("cls");
+//
+//		if (!cin.fail()) 
+//		{
+//			break;
+//		}
+//
+//		cout << "\ninvalid name. Try again.";
+//		system("pause");
+//		system("cls");
+//	}
+//	return new Character(name);
+//}
+
+int callMainMenu() 
+{
 	int selection;
 
-	while (true) {
-		std::cout << "===== ⚗️ Main Menu =====\n" << std::endl;
-		std::cout << "1. Player Menu" << std::endl;
-		std::cout << "2. Raid Dungeon" << std::endl;
-		std::cout << "3. Visit Shop" << std::endl;
-		std::cout << "4. Exit\n" << std::endl;
-		std::cout << "Enter selection : ";
+	while (true) 
+	{
+		cout << "===== Main Menu =====\n" << endl;
+		cout << "1. Player Menu" << endl;
+		cout << "2. Raid Dungeon" << endl;
+		cout << "3. Visit Shop" << endl;
+		cout << "4. Exit\n" << endl;
+		cout << "Enter selection : ";
 
-		std::cin >> selection;
+		cin >> selection;
 
-		if (std::cin.fail() || (selection < 0 || selection > 4)) {
-			std::cout << " invalid input." << std::endl;
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+		system("cls");
+
+		if (cin.fail() || (selection < 0 || selection > 4)) 
+		{
+			cout << " invalid input." << endl;
+			cin.clear();
+			cin.ignore(10000, '\n');
 		}
-		else {
+		else 
+		{
 			return selection;
 		}
-		system("cls");
 	}
 }
