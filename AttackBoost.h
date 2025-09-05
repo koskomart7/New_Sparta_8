@@ -9,6 +9,6 @@ private:
 public:
 	AttackBoost(int attackIncrease = 10, int price = 75, string name = "AttackBoost");
 
-	void Use(Character* character) override;
-	void ItemEffect() override;
+	//void Use(Character* character) override;
+	//void ItemEffect() override;
 };
