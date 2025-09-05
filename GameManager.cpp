@@ -64,19 +64,21 @@ void GameManager::battle(Character* player)
 
 		if(enemy[targetIdx]->getHealth() <= 0)
 		{
-			//enemy.erase(targetIdx);
+			//it'll be a part to get level from dead monster then add to earned XP and gold.
+
 			delete enemy.at(targetIdx);
 			enemy.at(targetIdx) = nullptr;
 		}
 
 		if(enemy.empty())
 		{
+			cout << "===== Battle Result ===== \n" << endl;
 			cout << "You have won the battle!" << endl;
 
 			/* codes for winning condition. */
 			
-			int earnedXP = (rand() * player->getLevel());  // rand() is placeholder.
-			int earnedGold = (rand() * player->getLevel());// rand() is placeholder.
+			int earnedXP = (randomRange(50, 100) * player->getLevel());  // randomRange() is placeholder.
+			int earnedGold = (randomRange(80, 150) * player->getLevel());// randomRange() is placeholder.
 
 			player->addGold(earnedGold);
 			player->addExp(earnedXP);
@@ -98,10 +100,14 @@ void GameManager::battle(Character* player)
 
 		if(player->getCurrentHealth() <= 0)
 		{
+			/* codes for losing condition. */
+
+			cout << "===== Battle Result ===== \n" << endl;
 			cout << "You have fallen..." << endl;
 
-			/* codes for losing condition. */
-			
+			system("pause");
+			system("cls");
+
 			break;
 		}
 	}
