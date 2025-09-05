@@ -17,6 +17,6 @@ public:
 	int getPrice() const;
 	string getName() const;
 
-	// virtual void Use(Character* character) = 0;
-	// virtual void ItemEffect() = 0;
+	virtual void Use(Character* character) = 0;
+	virtual void ItemEffect() = 0;
 };
