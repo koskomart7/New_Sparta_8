@@ -55,7 +55,7 @@ Monster* GameManager::spawnMonsters()
 
 void GameManager::battle() 
 {
-	int turns = 0, targetIdx = 0, enemySize = 0;
+	int turns = 0, targetIdx = 0, enemySize = 0, earnedXP = 0, earnedGold = 0;
 	vector<Monster*> enemy;
 
 	for (int i = 0; i < randomRange(1, 3); i++)
@@ -69,25 +69,32 @@ void GameManager::battle()
 	{
 		++turns;
 
+		cout << "===== Battle ===== \n" << endl;
+		cout << "----- Enemies -----" << endl;
+		for (auto enemyList : enemy)
+		{
+			cout << enemyList << endl;
+		}
+
 		// battle Logic here
 
-		if(enemy[targetIdx]->getHealth() <= 0)
+		if(enemy.at(targetIdx)->getHealth() <= 0)
 		{
 			//it'll be a part to get level from dead monster then add to earned XP and gold.
 
+			earnedXP += (randomRange(50, 80) * enemy[targetIdx]->getHealth());		// Need getLevel() for Monsters.
+			earnedGold += (randomRange(20, 150) * enemy[targetIdx]->getHealth());	// Need getLevel() for Monsters.
+
 			delete enemy.at(targetIdx);
-			enemy.at(targetIdx) = nullptr;
+			enemy[targetIdx] = nullptr;
+
+			enemy.erase(enemy.begin() + targetIdx);
 		}
 
-		if(enemy.empty())
+		if(enemy.empty()) /* Winning condition. */
 		{
 			cout << "===== Battle Result ===== \n" << endl;
 			cout << "You have won the battle!" << endl;
-
-			/* codes for winning condition. */
-			
-			int earnedXP = (randomRange(50, 100) * player->getLevel());  // randomRange() is placeholder.
-			int earnedGold = (randomRange(80, 150) * player->getLevel());// randomRange() is placeholder.
 
 			player->addGold(earnedGold);
 			player->addExp(earnedXP);
@@ -104,15 +111,26 @@ void GameManager::battle()
 				player->addExp(earnedXP);
 			}
 
+			system("pause");
+			system("cls");
+
 			break;
 		}
 
-		if(player->getCurrentHealth() <= 0)
+		if(player->getCurrentHealth() <= 0) /* Losing condition. */
 		{
-			/* codes for losing condition. */
-
 			cout << "===== Battle Result ===== \n" << endl;
 			cout << "You have fallen..." << endl;
+
+			player->setCurrentHealth(20);
+
+			for (auto enemyList : enemy)
+			{
+				delete enemyList;
+				enemyList = nullptr;
+			}
+
+			enemy.clear();
 
 			system("pause");
 			system("cls");
