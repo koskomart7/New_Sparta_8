@@ -56,6 +56,7 @@ Monster* GameManager::spawnMonsters()
 void GameManager::battle() 
 {
 	int turns = 0, targetIdx = 0, enemySize = 0, earnedXP = 0, earnedGold = 0;
+	int selection;
 	vector<Monster*> enemy;
 
 	for (int i = 0; i < randomRange(1, 3); i++)
@@ -65,18 +66,80 @@ void GameManager::battle()
 
 	enemySize = enemy.size();
 
-	while (true)
+	while (true) // Battle Logics
 	{
 		++turns;
 
-		cout << "===== Battle ===== \n" << endl;
-		cout << "----- Enemies -----" << endl;
-		for (auto enemyList : enemy)
+		cout << "===== Battle Turn " << turns << " =====\n" << endl;
+		cout << "--- Enemies : " << enemySize <<  " left ---" << endl;
+
+		for (int i = 0; i < enemySize; i++)
 		{
-			cout << enemyList << endl;
+			cout << i + 1 << " - " << enemy[i] << endl;
 		}
 
-		// battle Logic here
+		cout << "===== Behaviors =====\n" << endl;
+		cout << "1. Attack" << endl;
+		cout << "2. Use Item" << "\n" << endl;
+		cout << "Enter selection : ";
+
+		cin >> selection;
+
+		system("cls");
+
+		if (cin.fail() || (selection < 0 || selection > 2))
+		{
+			cout << " invalid input." << endl;
+			cin.clear();
+			cin.ignore(10000, '\n');
+		}
+
+		else
+		{
+			switch (selection)
+			{
+			case 1:
+			{
+				while (true) {
+					cout << "===== Attack =====\n" << endl;
+					cout << "--- Enemies : " << enemySize << " left ---" << endl;
+
+					for (int i = 0; i < enemySize; i++)
+					{
+						cout << i + 1 << " - " << enemy[i] << "\n" << endl;
+					}
+
+					cout << "select Target : ";
+
+					cin >> selection;
+
+					system("cls");
+
+					if (cin.fail() || (selection <= 0 || selection > enemySize))
+					{
+						cout << " invalid input." << endl;
+						cin.clear();
+						cin.ignore(10000, '\n');
+					}
+
+					else
+					{
+						break;
+					}
+
+					// player->getAttack();
+
+				}
+				break;
+			}
+
+			case 2:
+
+				break;
+			default:
+				break;
+			}
+		}
 
 		if(enemy.at(targetIdx)->getHealth() <= 0)
 		{
