@@ -6,5 +6,5 @@ class BossMonster : public Monster
 public:
 	BossMonster(int level);
 
-	Item* dropItem() override;
+	//Item* dropItem() override;
 };

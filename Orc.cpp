@@ -8,7 +8,7 @@ Orc::Orc(int level)
 	this->attack = level * (5 + rand() % 6);
 }
 
-Item* Orc::dropItem()
-{
-	return nullptr;
-}
+//Item* Orc::dropItem()
+//{
+//	return nullptr;
+//}

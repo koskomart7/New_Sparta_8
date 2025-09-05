@@ -6,5 +6,5 @@ class Troll : public Monster
 public:
 	Troll(int level);
 
-	Item* dropItem() override;
+	//Item* dropItem() override;
 };

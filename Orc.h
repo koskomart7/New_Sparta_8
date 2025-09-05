@@ -6,5 +6,5 @@ class Orc : public Monster
 public:
 	Orc(int level);
 
-	Item* dropItem() override;
+	//Item* dropItem() override;
 };

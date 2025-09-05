@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Monster.h"
+#include "Character.h"
 
 class GameManager {
 public:
-	Monster spawnMonsters(Character* player);
+	Monster* spawnMonsters(Character* player);
 
 	void battle(Character* player);
 

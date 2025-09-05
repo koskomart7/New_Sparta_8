@@ -8,7 +8,7 @@ Goblin::Goblin(int level)
 	this->attack = level * (5 + rand() % 6);
 }
 
-Item* Goblin::dropItem()
-{
-	return nullptr;
-}
+//Item* Goblin::dropItem()
+//{
+//	return nullptr;
+//}

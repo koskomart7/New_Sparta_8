@@ -8,7 +8,7 @@ BossMonster::BossMonster(int level)
 	this->attack = (int)(level * (5 + rand() % 6) * (1 + (rand() % 6 * 0.1f)));
 }
 
-Item* BossMonster::dropItem()
-{
-	return nullptr;
-}
+//Item* BossMonster::dropItem()
+//{
+//	return nullptr;
+//}

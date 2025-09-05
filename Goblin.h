@@ -6,5 +6,5 @@ class Goblin : public Monster
 public:
 	Goblin(int level);
 
-	Item* dropItem() override;
+	//Item* dropItem() override;
 };

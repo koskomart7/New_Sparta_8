@@ -8,7 +8,7 @@ Troll::Troll(int level)
 	this->attack = level * (5 + rand() % 6);
 }
 
-Item* Troll::dropItem()
-{
-	return nullptr;
-}
+//Item* Troll::dropItem()
+//{
+//	return nullptr;
+//}

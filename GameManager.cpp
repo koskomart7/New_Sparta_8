@@ -12,10 +12,10 @@
 
 using namespace std;
 
-Monster GameManager::spawnMonsters(Character* player)
+Monster* GameManager::spawnMonsters(Character* player)
 {
-	Monster monster;
-	int enemyLv = player->getLevel + randomRange(-2, 2);
+	Monster* monster = nullptr;
+	int enemyLv = player->getLevel() + randomRange(-2, 2);
 
 	while (!monster)
 	{
@@ -23,17 +23,17 @@ Monster GameManager::spawnMonsters(Character* player)
 		{
 		case 1:
 			// create goblin
-			monster = Goblin(enemyLv);
+			monster = new Goblin(enemyLv);
 			break;
 
 		case 2:
 			// create Orc
-			monster = Orc(enemyLv);
+			monster = new Orc(enemyLv);
 			break;
 
 		case 3:
 			// create Troll
-			monster = Troll(enemyLv);
+			monster = new Troll(enemyLv);
 			break;
 
 		default:
@@ -47,7 +47,7 @@ Monster GameManager::spawnMonsters(Character* player)
 void GameManager::battle(Character* player) 
 {
 	int turns = 0, targetIdx = 0, enemySize = 0;
-	vector<Monster> enemy;
+	vector<Monster*> enemy;
 
 	for (int i = 0; i < 3; i++) // will make it random(1 ~ 3) later.
 	{
@@ -62,9 +62,11 @@ void GameManager::battle(Character* player)
 
 		// battle Logic here
 
-		if(enemy[targetIdx].health <= 0)
+		if(enemy[targetIdx]->getHealth() <= 0)
 		{
-			enemy.erase(targetIdx);
+			//enemy.erase(targetIdx);
+			delete enemy.at(targetIdx);
+			enemy.at(targetIdx) = nullptr;
 		}
 
 		if(enemy.empty())
@@ -73,27 +75,28 @@ void GameManager::battle(Character* player)
 
 			/* codes for winning condition. */
 			
-			int earnedXP = player->addExp(rand() * player->level);  // rand() is placeholder.
-			int earnedGold = player->addGold(rand() * player->level);// rand() is placeholder.
+			int earnedXP = (rand() * player->getLevel());  // rand() is placeholder.
+			int earnedGold = (rand() * player->getLevel());// rand() is placeholder.
 
-			player->gold += earnedGold;
-			player->xp += earnedXP;
+			player->addGold(earnedGold);
+			player->addExp(earnedXP);
 
 			cout << "You have earned " << earnedXP << " XP, " << earnedGold << " Golds." << endl;
 
 			if (player->canLevelUp()) 
 			{
-				player->levelUp();
+				//player->levelUp();
+				player->addExp(earnedXP);
 			}
 			else
 			{
-				player->addExp;
+				player->addExp(earnedXP);
 			}
 
 			break;
 		}
 
-		if(player->health <= 0)
+		if(player->getCurrentHealth() <= 0)
 		{
 			cout << "You have fallen..." << endl;
 
@@ -106,7 +109,7 @@ void GameManager::battle(Character* player)
 
 void GameManager::bossBattle(Character* player) 
 {
-	Monster boss;
+	//Monster boss;
 }
 
 void GameManager::displayInv(Character* player)
