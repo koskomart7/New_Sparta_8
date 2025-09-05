@@ -1,18 +1,30 @@
 #pragma once
 
 #include "Monster.h"
+#include "Character.h"
 
 class GameManager {
+private:
+	Character* player;
+
 public:
-	Monster spawnMonsters(Character* player);
+	GameManager(Character*);
 
-	void battle(Character* player);
+	~GameManager();
 
-	void bossBattle(Character* player);
+	Monster* spawnMonsters();
 
-	void displayStats(Character* player);
+	void battle();
 
-	void displayInv(Character* player);
+	void bossBattle();
 
-	void shopping(Character* player);
+	void displayStats() const;
+
+	void displayInv() const;
+
+	void shopping();
 };
+
+Character* characterCreation();
+
+int callMainMenu();

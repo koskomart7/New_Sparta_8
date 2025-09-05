@@ -24,5 +24,5 @@ public:
 	int getDropGold() const;
 
 	void takeDamage(int damage);
-	virtual Item* dropItem() = 0;
+	//virtual Item* dropItem();
 };

@@ -10,7 +10,7 @@ BossMonster::BossMonster(int level, string name, int health, int attack, int dro
 	this->dropGold = dropGold + rand() % 11;
 }
 
-Item* BossMonster::dropItem()
-{
-	return nullptr;
-}
+//Item* BossMonster::dropItem()
+//{
+//	return nullptr;
+//}

@@ -10,7 +10,7 @@ Goblin::Goblin(int level, string name, int health, int attack, int dropExp, int 
 	this->dropGold = dropGold + rand() % 11;
 }
 
-Item* Goblin::dropItem()
-{
-	return nullptr;
-}
+//Item* Goblin::dropItem()
+//{
+//	return nullptr;
+//}

@@ -3,24 +3,25 @@
 #define CHARACTER_H
 #include <string>
 #include <vector>
+#include "Item.h"
 using namespace std;
 
-struct Item
-{
-    string name;
-    int healthBoost;
-    int attackBoost;
-    int price;
-
-    Item(const string& itemName, int health, int attack, int itemPrice)
-        : name(itemName), healthBoost(health), attackBoost(attack), price(itemPrice) {
-    }
-};
+//struct Item
+//{
+//    string name;
+//    int healthBoost;
+//    int attackBoost;
+//    int price;
+//
+//    Item(const string& itemName, int health, int attack, int itemPrice)
+//        : name(itemName), healthBoost(health), attackBoost(attack), price(itemPrice) {
+//    }
+//};
 
 class Character
 {
 private:
-    std::string name;
+    string name;
     int level;
     int currentHealth;
     int maxHealth;
@@ -45,7 +46,14 @@ public:
     int getGold() const { return gold; }
 
     //setter fuction
-
+    void setName(const string& PlayerName);
+    void setLevel(int lvl);
+    void setCurrentHealth(int newHealth);
+    void setAttack(int newAttack);
+    void setExp(int newExp);
+    void setGold(int newGold);
+    
+   
 
     void displayStatus() const;
     bool isAlive() const { return currentHealth > 0; }
@@ -71,7 +79,7 @@ public:
     }
     void displayInventory() const;
     bool useRandomItem();
-    bool sellItem(int index, int sellPrice);
+    bool sellItem(int index, vector<Item> Inventory);  // Modified with a parameter vector inventory
 
     const vector<Item>& getInventory() const { return inventory; }
 

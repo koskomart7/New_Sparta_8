@@ -1,5 +1,6 @@
 #pragma once
 
-#include <random>
+#include <cstdlib>
+#include <ctime>
 
-int randomRange(int min, int max) { return (double) rand() / (RAND_MAX + 1) * (max - min) + min; }
+inline int randomRange(int min, int max) {  return (double)rand() / (RAND_MAX + 1) * (max - min) + min; }

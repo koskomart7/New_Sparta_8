@@ -10,7 +10,7 @@ Orc::Orc(int level, string name, int health, int attack, int dropExp, int dropGo
 	this->dropGold = dropGold + rand() % 11;
 }
 
-Item* Orc::dropItem()
-{
-	return nullptr;
-}
+//Item* Orc::dropItem()
+//{
+//	return nullptr;
+//}

@@ -10,7 +10,7 @@ Troll::Troll(int level, string name, int health, int attack, int dropExp, int dr
 	this->dropGold = dropGold + rand() % 11;
 }
 
-Item* Troll::dropItem()
-{
-	return nullptr;
-}
+//Item* Troll::dropItem()
+//{
+//	return nullptr;
+//}
