@@ -60,7 +60,11 @@
     <ClCompile Include="HealthPotion.cpp">
       <Filter>소스 파일\Items</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Character.cpp">
+=======
+    <ClCompile Include="Shop.cpp">
+>>>>>>> 4b90c0f (shop 클래스 생성 및 정의)
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -97,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>헤더 파일\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
