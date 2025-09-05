@@ -1,6 +1,7 @@
 #include <vector>
 #include <random>
 
+#include "rangeRd.h"
 #include "GameManager.h"
 #include "Character.h"
 #include "Monster.h"
@@ -10,28 +11,28 @@
 
 using namespace std;
 
-Monster GameManager::spawnMonsters() 
+Monster GameManager::spawnMonsters(Character* player)
 {
 	Monster monster;
+	int enemyLv = player->getLevel + randomRange(-2, 2);
 
-	// will make it generates monster randomly.
 	while (!monster)
 	{
-		switch (rand())
+		switch (randomRange(1,3))
 		{
 		case 1:
 			// create goblin
-			monster = Goblin();
+			monster = Goblin(enemyLv);
 			break;
 
 		case 2:
 			// create Orc
-			monster = Orc();
+			monster = Orc(enemyLv);
 			break;
 
 		case 3:
 			// create Troll
-			monster = Troll();
+			monster = Troll(enemyLv);
 			break;
 
 		default:
@@ -49,7 +50,7 @@ void GameManager::battle(Character* player)
 
 	for (int i = 0; i < 3; i++) // will make it random(1 ~ 3) later.
 	{
-		enemy.push_back(spawnMonsters());
+		enemy.push_back(spawnMonsters(player));
 	}
 
 	enemySize = enemy.size();

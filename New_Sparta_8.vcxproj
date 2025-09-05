@@ -143,6 +143,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="rangeRd.h" />
     <ClInclude Include="Troll.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

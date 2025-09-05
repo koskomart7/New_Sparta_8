@@ -4,7 +4,7 @@
 
 class GameManager {
 public:
-	Monster spawnMonsters();
+	Monster spawnMonsters(Character* player);
 
 	void battle(Character* player);
 
