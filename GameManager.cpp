@@ -153,7 +153,15 @@ void GameManager::displayInv() const
 
 void GameManager::displayStats() const
 {
-	// displayStats Logic
+	cout << "===== Character Stats =====\n" << endl;
+	cout << "Name : " << player->getName() << endl;
+	cout << "Level : " << player->getLevel() << endl;
+	cout << "Exp : " << player->getExp() << endl;
+	cout << "Health : " << player->getMaxHealth() << endl;
+	cout << "Attack : " << player->getAttack() << "\n" << endl;
+
+	system("pause");
+	system("cls");
 }
 
 void GameManager::shopping()
@@ -191,7 +199,7 @@ Character* characterCreation()
 	cout << "Level : " << player->getLevel() << endl;
 	cout << "Exp : " << player->getExp() << endl;
 	cout << "Health : " << player->getMaxHealth() << endl;
-	cout << "Attack : " << player->getAttack() << endl;
+	cout << "Attack : " << player->getAttack() << "\n" << endl;
 
 	system("pause");
 	system("cls");
@@ -257,7 +265,7 @@ void callPlayerMenu(GameManager& game)
 			switch (selection)
 			{
 			case 1:
-				//game.displayStats();
+				game.displayStats();
 				break;
 			case 2:
 				game.displayInv();
