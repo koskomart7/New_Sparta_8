@@ -13,7 +13,7 @@ int main()
     }
 
     // Character* player = characterCreation();
-
+    
     while (true) {
         int selection = callMainMenu();
 
@@ -34,6 +34,6 @@ int main()
             break;
         }
     }
-    //delete player;
+    // delete player;
     // player = nullptr;
 }
