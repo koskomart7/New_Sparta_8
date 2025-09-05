@@ -12,7 +12,7 @@ int main()
         std::cout << randomRange(1, 10) << std::endl; // Testing randomRange()
     }
 
-    // Character* player = characterCreation();
+    GameManager game(characterCreation());
     
     while (true) {
         int selection = callMainMenu();
@@ -34,6 +34,4 @@ int main()
             break;
         }
     }
-    // delete player;
-    // player = nullptr;
 }

@@ -12,7 +12,15 @@
 
 using namespace std;
 
-Monster* GameManager::spawnMonsters(Character* player)
+GameManager::GameManager(Character* newPlayer) : player(newPlayer) {};
+
+GameManager::~GameManager() 
+{
+	delete this->player;
+	this->player = nullptr;
+};
+
+Monster* GameManager::spawnMonsters()
 {
 	Monster* monster = nullptr;
 	int enemyLv = player->getLevel() + randomRange(-2, 2);
@@ -44,14 +52,14 @@ Monster* GameManager::spawnMonsters(Character* player)
 	return monster;
 }
 
-void GameManager::battle(Character* player) 
+void GameManager::battle() 
 {
 	int turns = 0, targetIdx = 0, enemySize = 0;
 	vector<Monster*> enemy;
 
 	for (int i = 0; i < randomRange(1, 3); i++)
 	{
-		enemy.push_back(spawnMonsters(player));
+		enemy.push_back(spawnMonsters());
 	}
 
 	enemySize = enemy.size();
@@ -113,49 +121,63 @@ void GameManager::battle(Character* player)
 	}
 }
 
-void GameManager::bossBattle(Character* player) 
+void GameManager::bossBattle() 
 {
 	//Monster boss;
 }
 
-void GameManager::displayInv(Character& player) const
+void GameManager::displayInv() const
 {
 	// displayInv Logic
 }
 
-void GameManager::displayStats(Character& player) const
+void GameManager::displayStats() const
 {
 	// displayStats Logic
 }
 
-void GameManager::shopping(Character* player)
+void GameManager::shopping()
 {
 	// shop
 }
 
-//Character* characterCreation() 
-//{
-//	string name;
-//
-//	while(true)
-//	{
-//		cout << "===== Create Character =====\n" << endl;
-//		cout << "Enter name : ";
-//
-//		getline(cin, name);
-//		system("cls");
-//
-//		if (!cin.fail()) 
-//		{
-//			break;
-//		}
-//
-//		cout << "\ninvalid name. Try again.";
-//		system("pause");
-//		system("cls");
-//	}
-//	return new Character(name);
-//}
+Character* characterCreation() 
+{
+	string name;
+	Character* player;
+
+	while(true)
+	{
+		cout << "===== Create Character =====\n" << endl;
+		cout << "Enter name : ";
+
+		getline(cin, name);
+		system("cls");
+
+		if (!cin.fail()) 
+		{
+			break;
+		}
+
+		cout << "\ninvalid name. Try again.";
+		system("pause");
+		system("cls");
+	}
+
+	player = new Character(name);
+
+	cout << "===== Character Created! =====\n" << endl;
+	cout << "Name : " << player->getName() << endl;
+	cout << "Level : " << player->getLevel() << endl;
+	cout << "Exp : " << player->getExp() << endl;
+	cout << "Health : " << player->getMaxHealth() << endl;
+	cout << "Attack : " << player->getAttack() << endl;
+
+	system("pause");
+	system("cls");
+
+	return player;
+}
 
 int callMainMenu() 
 {
