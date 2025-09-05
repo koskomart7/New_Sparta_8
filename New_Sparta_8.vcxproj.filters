@@ -25,6 +25,9 @@
     <Filter Include="헤더 파일\Items">
       <UniqueIdentifier>{a5622b6c-ca7c-4d40-9008-7c67544ea934}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Character">
+      <UniqueIdentifier>{5799d3cd-4f84-421b-b4c5-6a134cedb61d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="New_Sparta_8.cpp">
@@ -85,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="HealthPotion.h">
       <Filter>헤더 파일\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="rangeRd.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>헤더 파일\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
