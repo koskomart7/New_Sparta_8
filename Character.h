@@ -28,7 +28,7 @@ private:
     int attack;
     int exp;
     int gold;
-    vector<Item> inventory;
+    vector<Item*> inventory;
 
     static const int EXP_FOR_LEVELUP = 100;
     static const int MAX_LEVEL = 10;
@@ -72,16 +72,16 @@ public:
     bool spendGold(int amount) {};
 
 
-    void addItem(const Item& item) {};  // TEMP {}
+    void addItem(const Item* item) {};  // TEMP {}
     bool hasItems() const
     {
         return !inventory.empty();
     }
     //void displayInventory() const;
     bool useRandomItem() {};
-    bool sellItem(int index, vector<Item> Inventory) {};  // Modified with a parameter vector inventory
+    bool sellItem(int index, vector<Item*> Inventory) {};  // Modified with a parameter vector inventory
 
-    const vector<Item>& getInventory() const { return inventory; }
+    const vector<Item*> getInventory() const { return inventory; }
 
 private:
     void updateMaxHealth() {};
