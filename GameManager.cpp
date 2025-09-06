@@ -24,7 +24,17 @@ GameManager::~GameManager()
 Monster* GameManager::spawnMonsters()
 {
 	Monster* monster = nullptr;
-	int enemyLv = player->getLevel() + randomRange(-2, 2);
+	int enemyLv = 0;
+
+	if (player->getLevel() <= 2) 
+	{
+		enemyLv = player->getLevel() + randomRange(0, 1);
+	}
+
+	else
+	{
+		enemyLv = player->getLevel() + randomRange(-2, 2);
+	}
 
 	while (!monster)
 	{
@@ -49,13 +59,13 @@ Monster* GameManager::spawnMonsters()
 			break;
 		}
 	}
-
 	return monster;
 }
 
 void GameManager::battle() 
 {
-	int turns = 0, targetIdx = 0, enemySize = 0, earnedXP = 0, earnedGold = 0;
+	int targetIdx = 0, enemySize = 0, earnedXP = 0, earnedGold = 0;
+	int turns = 1;
 	int selection;
 	vector<Monster*> enemy;
 
@@ -66,8 +76,6 @@ void GameManager::battle()
 
 	while (true) // Battle Logics
 	{
-		++turns;
-
 		enemySize = enemy.size();
 
 		cout << "===== Battle Turn " << turns << " =====\n" << endl;
@@ -75,10 +83,10 @@ void GameManager::battle()
 
 		for (int i = 0; i < enemySize; i++)
 		{
-			cout << i + 1 << " - " << enemy[i] << endl;
+			cout << i + 1 << " - " << enemy[i]->getName() << endl;
 		}
 
-		cout << "===== Behaviors =====\n" << endl;
+		cout << "\n===== Behaviors =====\n" << endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Use Item" << "\n" << endl;
 		cout << "Enter selection : ";
@@ -112,11 +120,11 @@ void GameManager::battle()
 
 					cout << "select Target : ";
 
-					cin >> selection;
+					cin >> targetIdx;
 
 					system("cls");
 
-					if (cin.fail() || (selection <= 0 || selection > enemySize))
+					if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
@@ -129,15 +137,26 @@ void GameManager::battle()
 					}
 				}	// Attack Menu end
 
-				attack(enemy[selection]);
-				beingAttacked(enemy[randomRange(1, enemySize)]);
+				targetIdx -= 1;
+
+				attack(enemy[targetIdx]);
+
+				if (enemySize < 1) {
+					beingAttacked(enemy[randomRange(0, enemySize - 1)]);
+				}
+				
+				else {
+					beingAttacked(enemy[targetIdx]);
+				}
+
+				++turns;
 
 				break;
 			}
 
 			case 2:
 				// Item fuction here.
-				break;
+				continue;
 
 			default:
 				break;
@@ -226,12 +245,12 @@ void GameManager::attack(Monster* target)
 	cout << target->getName() << " has taken " << damage << " damage.\n" << endl;
 
 	system("pause");
-	system("clr");
+	system("cls");
 }
 
 void GameManager::beingAttacked(Monster* monster)
 {
-	int damage = monster->getAttack();
+	int damage = monster->getAttack() + randomRange(0, 3);
 	//player->setCurrentHealth(player->getCurrentHealth - damamge);	//placeholder
 
 	cout << "===== Attack ===== \n" << endl;
@@ -239,7 +258,7 @@ void GameManager::beingAttacked(Monster* monster)
 	cout << " you have taken " << damage << " damage.\n" << endl;
 
 	system("pause");
-	system("clr");
+	system("cls");
 }
 
 void GameManager::displayInv() const
@@ -294,14 +313,15 @@ Character* characterCreation()
 		cout << "Enter name : ";
 
 		getline(cin, name);
-		system("cls");
+		
 
-		if (!cin.fail()) 
+		if (!cin.fail() && !name.empty() && !all_of(name.begin(), name.end(), isspace)) // Checks if name is blank.
 		{
+			system("cls");
 			break;
 		}
 
-		cout << "\ninvalid name. Try again.";
+		cout << "\ninvalid name. Try again." << endl;
 		system("pause");
 		system("cls");
 	}
