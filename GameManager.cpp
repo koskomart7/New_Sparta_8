@@ -193,7 +193,7 @@ void GameManager::battle()
 
 			if (player->canLevelUp()) 
 			{
-				//player->levelUp();
+				player->levelUp();
 				player->addExp(earnedXP);
 			}
 			else
