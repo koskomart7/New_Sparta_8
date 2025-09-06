@@ -64,11 +64,11 @@ void GameManager::battle()
 		enemy.push_back(spawnMonsters());
 	}
 
-	enemySize = enemy.size();
-
 	while (true) // Battle Logics
 	{
 		++turns;
+
+		enemySize = enemy.size();
 
 		cout << "===== Battle Turn " << turns << " =====\n" << endl;
 		cout << "--- Enemies : " << enemySize <<  " left ---" << endl;
@@ -100,13 +100,14 @@ void GameManager::battle()
 			{
 			case 1:
 			{
-				while (true) {
+				while (true)	// Attack Menu
+				{
 					cout << "===== Attack =====\n" << endl;
 					cout << "--- Enemies : " << enemySize << " left ---" << endl;
 
 					for (int i = 0; i < enemySize; i++)
 					{
-						cout << i + 1 << " - " << enemy[i] << "\n" << endl;
+						cout << i + 1 << " - " << enemy[i]->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
 					}
 
 					cout << "select Target : ";
@@ -126,16 +127,18 @@ void GameManager::battle()
 					{
 						break;
 					}
+				}	// Attack Menu end
 
-					// player->getAttack();
+				attack(enemy[selection]);
+				beingAttacked(enemy[randomRange(1, enemySize)]);
 
-				}
 				break;
 			}
 
 			case 2:
-
+				// Item fuction here.
 				break;
+
 			default:
 				break;
 			}
@@ -144,6 +147,8 @@ void GameManager::battle()
 		if(enemy.at(targetIdx)->getHealth() <= 0)
 		{
 			//it'll be a part to get level from dead monster then add to earned XP and gold.
+			cout << "===== Attack =====\n" << endl;
+			cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
 
 			earnedXP += (randomRange(50, 80) * enemy[targetIdx]->getHealth());		// Need getLevel() for Monsters.
 			earnedGold += (randomRange(20, 150) * enemy[targetIdx]->getHealth());	// Need getLevel() for Monsters.
@@ -162,7 +167,7 @@ void GameManager::battle()
 			player->addGold(earnedGold);
 			player->addExp(earnedXP);
 
-			cout << "You have earned " << earnedXP << " XP, " << earnedGold << " Golds." << endl;
+			cout << "You have earned " << earnedXP << " XP, " << earnedGold << " Golds.\n" << endl;
 
 			if (player->canLevelUp()) 
 			{
@@ -206,6 +211,32 @@ void GameManager::battle()
 void GameManager::bossBattle() 
 {
 	//Monster boss;
+}
+
+void GameManager::attack(Monster* target)
+{
+	int damage = player->getAttack();
+	// target->setHealth(target->getHealth() - damage);	//placeholder
+
+	cout << "===== Attack ===== \n" << endl;
+	cout << "Attacking " << target->getName() << "!" << endl;
+	cout << target->getName() << " has taken " << damage << " damage.\n" << endl;
+
+	system("pause");
+	system("clr");
+}
+
+void GameManager::beingAttacked(Monster* monster)
+{
+	int damage = monster->getAttack();
+	//player->setCurrentHealth(player->getCurrentHealth - damamge);	//placeholder
+
+	cout << "===== Attack ===== \n" << endl;
+	cout << monster->getName() << " attacked you" << "!" << endl;
+	cout << " you have taken " << damage << " damage.\n" << endl;
+
+	system("pause");
+	system("clr");
 }
 
 void GameManager::displayInv() const

@@ -18,6 +18,10 @@ public:
 
 	void bossBattle();
 
+	void attack(Monster*);
+
+	void beingAttacked(Monster*);
+
 	void displayStats() const;
 
 	void displayInv() const;
