@@ -157,6 +157,9 @@ void GameManager::battle()
 			enemy[targetIdx] = nullptr;
 
 			enemy.erase(enemy.begin() + targetIdx);
+
+			system("pause");
+			system("cls");
 		}
 
 		if(enemy.empty()) /* Winning condition. */
