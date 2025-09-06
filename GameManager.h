@@ -27,6 +27,8 @@ public:
 	void displayInv() const;
 
 	void shopping();
+
+	inline int getPlayerLevel() { return player->getLevel(); }
 };
 
 Character* characterCreation();

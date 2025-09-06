@@ -17,14 +17,26 @@ int main()
         case 1:
             callPlayerMenu(game);
             break;
+
         case 2:
-            game.battle();
+            if (game.getPlayerLevel() >= 10) 
+            {
+                game.bossBattle();
+            }
+
+            else
+            {
+                game.battle();
+            }
             break;
+
         case 3:
             // shop here
             break;
+
         case 4:
             return 0;
+
         default:
             break;
         }
