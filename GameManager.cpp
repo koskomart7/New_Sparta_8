@@ -28,17 +28,17 @@ Monster* GameManager::spawnMonsters()
 
 	if (player->getLevel() <= 2) 
 	{
-		enemyLv = player->getLevel() + randomRange(0, 1);
+		enemyLv = player->getLevel() + randomRange(0, 2);
 	}
 
 	else
 	{
-		enemyLv = player->getLevel() + randomRange(-2, 2);
+		enemyLv = player->getLevel() + randomRange(-3, 3);
 	}
 
 	while (!monster)
 	{
-		switch (randomRange(1,3))
+		switch (randomRange(1,4))
 		{
 		case 1:
 			// create goblin
@@ -69,7 +69,7 @@ void GameManager::battle()
 	int selection;
 	vector<Monster*> enemy;
 
-	for (int i = 0; i < randomRange(1, 3); i++)
+	for (int i = 0; i < randomRange(1, 4); i++)
 	{
 		enemy.push_back(spawnMonsters());
 	}
@@ -108,7 +108,7 @@ void GameManager::battle()
 			{
 			case 1:
 			{
-				while (true)	// Attack Menu
+				while (true)	// Attack Menu; Will be automated.
 				{
 					cout << "===== Attack =====\n" << endl;
 					cout << "--- Enemies : " << enemySize << " left ---" << endl;
@@ -142,7 +142,7 @@ void GameManager::battle()
 				attack(enemy[targetIdx]);
 
 				if (enemySize < 1) {
-					beingAttacked(enemy[randomRange(0, enemySize - 1)]);
+					beingAttacked(enemy[randomRange(0, enemySize)]);
 				}
 				
 				else {
@@ -207,7 +207,7 @@ void GameManager::battle()
 			break;
 		}
 
-		if(player->getCurrentHealth() <= 0) /* Losing condition. */
+		if(!player->isAlive()) /* Losing condition. */
 		{
 			cout << "===== Battle Result ===== \n" << endl;
 			cout << "You have fallen..." << endl;
@@ -238,7 +238,7 @@ void GameManager::bossBattle()
 void GameManager::attack(Monster* target)
 {
 	int damage = player->getAttack();
-	// target->setHealth(target->getHealth() - damage);	//placeholder
+	target->takeDamage(damage);
 
 	cout << "===== Attack ===== \n" << endl;
 	cout << "Attacking " << target->getName() << "!" << endl;
@@ -250,8 +250,8 @@ void GameManager::attack(Monster* target)
 
 void GameManager::beingAttacked(Monster* monster)
 {
-	int damage = monster->getAttack() + randomRange(0, 3);
-	//player->setCurrentHealth(player->getCurrentHealth - damamge);	//placeholder
+	int damage = monster->getAttack() + randomRange(0, 4);
+	player->setCurrentHealth(player->getCurrentHealth() - damage);
 
 	cout << "===== Attack ===== \n" << endl;
 	cout << monster->getName() << " attacked you" << "!" << endl;
