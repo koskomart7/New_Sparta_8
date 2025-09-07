@@ -13,6 +13,10 @@ Troll::Troll(int level, string name, int health, int attack, int dropExp, int dr
 	this->dropGold = dropGold + randomRange(RANDOM_MIN_ZERO, RANDOM_MAX_PLUS_10);
 }
 
+Troll::~Troll()
+{
+}
+
 //Item* Troll::dropItem()
 //{
 //	return nullptr;

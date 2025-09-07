@@ -6,6 +6,10 @@ Item::Item()
 	this->name = "";
 }
 
+Item::~Item()
+{
+}
+
 int Item::getPrice() const
 {
 	return price;
@@ -14,4 +18,14 @@ int Item::getPrice() const
 string Item::getName() const
 {
 	return name;
+}
+
+void Item::setPrice(int price)
+{
+	this->price = price;
+}
+
+void Item::setName(string name)
+{
+	this->name = name;
 }

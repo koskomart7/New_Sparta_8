@@ -12,6 +12,10 @@ Goblin::Goblin(int level, string name, int health, int attack, int dropExp, int 
 	this->dropExp = dropExp;
 	this->dropGold = dropGold + randomRange(RANDOM_MIN_ZERO, RANDOM_MAX_PLUS_10);
 }
+
+Goblin::~Goblin()
+{
+}
 	
 
 //Item* Goblin::dropItem()

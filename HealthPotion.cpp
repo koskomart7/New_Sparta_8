@@ -9,6 +9,10 @@ HealthPotion::HealthPotion(int healthRestore, int price, string name)
 	this->name = name;
 }
 
+HealthPotion::~HealthPotion()
+{
+}
+
 void HealthPotion::Use(Character* character)
 {
 	character->setCurrentHealth(healthRestore);

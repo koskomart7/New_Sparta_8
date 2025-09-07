@@ -20,6 +20,10 @@ BossMonster::BossMonster(int level, string name, int health, int attack, int dro
 
 }
 
+BossMonster::~BossMonster()
+{
+}
+
 //Item* BossMonster::dropItem()
 //{
 //	return nullptr;

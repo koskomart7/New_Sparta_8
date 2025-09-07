@@ -9,6 +9,10 @@ AttackBoost::AttackBoost(int attackIncrease, int price, string name)
     this->name = name;
 }
 
+AttackBoost::~AttackBoost()
+{
+}
+
 void AttackBoost::Use(Character* character)
 {
 	character->setAttack(attackIncrease);
