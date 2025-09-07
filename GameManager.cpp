@@ -83,7 +83,7 @@ void GameManager::battle()
 
 		for (int i = 0; i < enemySize; i++)
 		{
-			cout << i + 1 << " - " << enemy[i]->getName() << endl;
+			cout << i + 1 << " - " << enemy.at(i)->getName() << endl;
 		}
 
 		cout << "\n===== Behaviors =====\n" << endl;
@@ -115,7 +115,7 @@ void GameManager::battle()
 
 					for (int i = 0; i < enemySize; i++)
 					{
-						cout << i + 1 << " - " << enemy[i]->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
+						cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
 					}
 
 					cout << "select Target : ";
