@@ -1,4 +1,5 @@
 #include "Monster.h"
+#include "Item.h"
 
 Monster::Monster()
 {
@@ -7,6 +8,10 @@ Monster::Monster()
 	this->attack = 0;
 	this->dropExp = 0;
 	this->dropGold = 0;
+}
+
+Monster::~Monster()
+{
 }
 
 string Monster::getName() const
@@ -32,6 +37,31 @@ int Monster::getDropExp() const
 int Monster::getDropGold() const
 {
 	return dropGold;
+}
+
+void Monster::setName(string name)
+{
+	this->name = name;
+}
+
+void Monster::setHealth(int health)
+{
+	this->health = health;
+}
+
+void Monster::setAttack(int attack)
+{
+	this->attack = attack;
+}
+
+void Monster::setDropExp(int dropExp)
+{
+	this->dropExp = dropExp;
+}
+
+void Monster::getDropGold(int dropGold)
+{
+	this->dropGold = dropGold;
 }
 
 void Monster::takeDamage(int damage)

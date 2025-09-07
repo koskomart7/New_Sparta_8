@@ -13,6 +13,10 @@ Orc::Orc(int level, string name, int health, int attack, int dropExp, int dropGo
 	this->dropGold = dropGold + randomRange(RANDOM_MIN_ZERO, RANDOM_MAX_PLUS_10);
 }
 
+Orc::~Orc()
+{
+}
+
 //Item* Orc::dropItem()
 //{
 //	return nullptr;
