@@ -8,6 +8,8 @@ class Shop;
 class GameManager {
 private:
 	Character* player;
+	vector<int> killLogs;
+	vector<int> playLogs;
 
 public:
 	GameManager(Character*);
@@ -31,6 +33,8 @@ public:
 	void shoppingBuy(int, Shop&);
 
 	void shoppingSell(int, Shop&);
+
+	void logKill(Monster*);
 };
 
 Character* characterCreation();
