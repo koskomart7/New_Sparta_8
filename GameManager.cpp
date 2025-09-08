@@ -352,7 +352,7 @@ void GameManager::displayStats() const
 	cout << "Name : " << player->getName() << endl;
 	cout << "Level : " << player->getLevel() << endl;
 	cout << "Exp : " << player->getExp() << endl;
-	cout << "Health : " << player->getMaxHealth() << endl;
+	cout << "Health : " << player->getCurrentHealth() << " / " << player->getMaxHealth() << endl;
 	cout << "Attack : " << player->getAttack() << "\n" << endl;
 
 	system("pause");
