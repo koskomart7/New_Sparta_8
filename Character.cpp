@@ -221,6 +221,10 @@ bool Character::useRandomItem()
         cout << " [LOG] 사용할 수 있는 아이템이 없습니다. " << endl;
         return false;
     }
+
+
+
+
     return false;
 }
 
