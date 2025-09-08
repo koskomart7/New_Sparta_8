@@ -39,8 +39,8 @@ void Character::setLevel(int lvl)
     {
         currentHealth = maxHealth;
     }
-    cout << "Level has changed from" << oldLevel << "to" << endl;
-    cout << "New Maximum Health: " << maxHealth << ", New Maximum Attack Power " << attack << endl;
+    cout << "Level has changed from " << oldLevel << " to " << endl;
+    cout << "New Maximum Health: " << maxHealth << " , New Maximum Attack Power " << attack << endl;
 }
 
 void Character::setCurrentHealth(int newHealth)
@@ -52,7 +52,7 @@ void Character::setCurrentHealth(int newHealth)
     }
     else if (newHealth > maxHealth) 
     {
-        cout << "Warning: Your current health exceeds maximum health" << maxHealth << "Setting to maximum." << endl;
+        cout << "Warning: Your current health exceeds maximum health " << maxHealth << " Setting to maximum." << endl;
         currentHealth = maxHealth;
     }
     else 
@@ -60,7 +60,7 @@ void Character::setCurrentHealth(int newHealth)
         currentHealth = newHealth;
     }
 
-    cout << "Your current health has been set to" << currentHealth << endl;
+    cout << "Your current health has been set to " << currentHealth << endl;
 
 }
 
@@ -166,8 +166,8 @@ void Character::validateAndUpdateStats()
 void Character::takeDamage(int damage)
 {
     currentHealth = max(0, currentHealth - damage);
-    cout << name << "has received " << damage << " damage. " 
-        << "Remain HP : " << currentHealth << endl;
+    cout << name << " has received " << damage << " damage. " 
+        << " Remain HP : " << currentHealth << endl;
 }
 
 void Character::heal(int amount)
