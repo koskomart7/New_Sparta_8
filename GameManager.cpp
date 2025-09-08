@@ -202,13 +202,14 @@ void GameManager::battle()
 						break;
 					}
 
+					cout << "Type '0' to return." << endl;
 					cout << "select Item : ";
 
 					cin >> itemIdx;
 
 					system("cls");
 
-					if (cin.fail() || (itemIdx <= 0 || itemIdx > player->getInventorySize()))
+					if (cin.fail() || (itemIdx < 0 || itemIdx > player->getInventorySize()))
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
@@ -546,13 +547,19 @@ void callShopMenu(GameManager& game, Shop& shop)
 					shop.displayItems();
 					cout << "\n" << endl;
 					game.displayInv(false);
-					cout << "\nSelect item to buy : ";
+					cout << "\nType '0' to return." << endl;
+					cout << "Select item to buy : ";
 
 					cin >> selection;
 
 					system("cls");
 
-					if (cin.fail())
+					if (selection == 0)
+					{
+						break;
+					}
+
+					else if (cin.fail())
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
@@ -576,13 +583,19 @@ void callShopMenu(GameManager& game, Shop& shop)
 					shop.displayItems();
 					cout << "\n" << endl;
 					game.displayInv(false);
-					cout << "\nSelect item to Sell : ";
+					cout << "\nType '0' to return." << endl;
+					cout << "Select item to Sell : ";
 
 					cin >> selection;
 
 					system("cls");
 
-					if (cin.fail())
+					if (selection == 0)
+					{
+						break;
+					}
+
+					else if (cin.fail())
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
