@@ -69,10 +69,10 @@ public:
 
 
     void addGold(int amount) { gold += amount; }
-    bool spendGold(int amount) {};  //
+    bool spendGold(int amount);  
 
 
-    void addItem(const Item* item) {};  // TEMP {}
+    void addItem(Item* item);  
     bool hasItems() const
     {
         return !inventory.empty();

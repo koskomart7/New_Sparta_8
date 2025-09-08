@@ -171,10 +171,29 @@ void Character::takeDamage(int damage)
 
 void Character::heal(int amount)
 {
-    /*int healedAmount = min(amount, maxHealth - currentHealth);
-    currentHealth += healedAmount;*/
-
+    int healedAmount = min(amount, maxHealth - currentHealth);
+    currentHealth += healedAmount;
+    cout << name << " has recovered by " << healedAmount << ". "
+        << "Current health: " << currentHealth << "/" << maxHealth << endl;
 }
+
+bool Character::spendGold(int amount)
+{
+    if(gold >= amount)
+    {
+        gold -= amount;
+        return true;
+    }
+    return false;
+}
+
+void Character::addItem(Item* item)
+{
+    inventory.push_back(item);
+}
+
+
+
 
 
 
