@@ -38,7 +38,7 @@ void AttackBoost::Use(Character* character)
 {
 	if (character != nullptr)
 	{
-		character->setAttack(attackIncrease);
+		character->dealBuffCalc(attackIncrease, duration);
 	}
 }
 
