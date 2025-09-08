@@ -211,11 +211,11 @@ void GameManager::battle()
 
 					cin >> itemIdx;
 
-					--itemIdx;
+					//--itemIdx;
 
 					system("cls");
 
-					if (itemIdx == -1)
+					if (itemIdx == 0)
 					{
 						continue;
 					}
@@ -233,12 +233,12 @@ void GameManager::battle()
 
 						if (dynamic_cast<HealthPotion*> (inv[itemIdx]))
 						{
-							inv[itemIdx]->Use(player);
+							inv[--itemIdx]->Use(player);
 						}
 
 						else if (dynamic_cast<AttackBoost*> (inv[itemIdx]))
 						{
-							inv[itemIdx]->Use(player);
+							inv[--itemIdx]->Use(player);
 						}
 						
 						player->removeItem(itemIdx);
