@@ -119,7 +119,7 @@ void GameManager::battle()
 
 		cout << "\n --- Current HP : " << player->getCurrentHealth() << endl;
 
-		cout << "\n===== Behaviors =====\n" << endl;
+		cout << "===== Behaviors =====\n" << endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Use Item" << "\n" << endl;
 		cout << "Enter selection : ";
@@ -220,7 +220,7 @@ void GameManager::battle()
 						break;
 					}
 				}
-			}
+			}	// Item Menu End
 				continue;
 
 			default:
