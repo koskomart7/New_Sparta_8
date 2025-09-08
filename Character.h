@@ -28,7 +28,7 @@ private:
     int maxHealth;
     int attack;
     int exp;
-    int gold;
+    int gold;     
     vector<Item*> inventory;
 
     static const int EXP_FOR_LEVELUP = 100;
@@ -78,7 +78,8 @@ public:
     bool spendGold(int amount);  
 
     
-    void addItem(Item* item);   // remove Item 추가 구현   
+    void addItem(Item* item);   // remove Item 추가 구현 
+    bool removeItem(size_t index); // 인벤토리에서 지정 인덱스의 아이템 삭제
     bool hasItems() const
     {
         return !inventory.empty();

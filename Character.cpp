@@ -214,6 +214,21 @@ void Character::addItem(Item* item)
     }
 }
 
+bool Character::removeItem(size_t index)
+{
+    if (index-1 >= inventory.size())
+    {
+        cout << "[주의!!] 잘못된 아이템 인덱스: " << index-1 << endl;
+        return false;
+    }
+    delete inventory[index-1];
+    inventory.erase(inventory.begin() + index-1);
+
+    cout << "[LOG] 인벤토리에서 아이템" << index << "번이 삭제되었습니다." << endl;
+
+    return true;
+}
+
 bool Character::useRandomItem()
 {
     if (inventory.empty())
