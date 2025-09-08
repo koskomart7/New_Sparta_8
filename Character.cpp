@@ -10,6 +10,16 @@ Character::Character(const string& characterName)
 	
 }
 
+Character::~Character()
+{
+    for (auto* item : inventory)
+    {
+        delete item;
+    }
+    inventory.clear();
+    cout << "[LOG] Player " << name << " destroyed " << endl;
+}
+
 //setter function
 
 void Character::setName(const string& PlayerName)
@@ -134,12 +144,14 @@ void Character::levelUp()
     // Full recovery of HP
     currentHealth = maxHealth;
 
+    cout << "=======================================" << endl;
     cout << "\n Level UP! " << name << "This level " << level << "has been reached!" << endl;
     cout << "Maximum Health: " << oldMaxHealth << " → " << maxHealth
         << " (+" << (maxHealth - oldMaxHealth) << ")" << endl;
     cout << "Attack Power : " << oldAttack << " → " << attack
         << " (+" << (attack - oldAttack) << ")" << endl;
     cout << "Your stamina has been fully restored!!" << endl;
+    cout << "=======================================" << endl;
 }
 
 void Character::updateMaxHealth()
@@ -165,12 +177,14 @@ void Character::validateAndUpdateStats()
 
 void Character::takeDamage(int damage)
 {
+    if (damage <= 0) return;
     currentHealth = max(0, currentHealth - damage);
 }
 
 
 void Character::heal(int amount)
 {
+    if (amount <= 0) return;
     int healedAmount = min(amount, maxHealth - currentHealth);
     currentHealth += healedAmount;
     cout << name << " has recovered by " << healedAmount << ". "
@@ -189,8 +203,13 @@ bool Character::spendGold(int amount)
 
 void Character::addItem(Item* item)
 {
-    inventory.push_back(item);
+    if (item != nullptr)
+    {
+        inventory.push_back(item);
+    }
 }
+
+
 
 
 
