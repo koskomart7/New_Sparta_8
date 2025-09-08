@@ -213,12 +213,15 @@ void Character::advanceTurn()
 
 void Character::dealBuffCalc(int buffAmount, int buffTurns)
 {
-    if (buffTurnsRemaining > 0) return;
-    attack += buffAmount;
-    attackBuffAmount = buffAmount;
-    buffTurnsRemaining = buffTurns;
-    cout << "[LOG] 공격력 +" << buffAmount
-        << " 버프 적용 (" << buffTurns << "턴)\n";
+    if (buffTurns > 0)
+    {
+        attack += buffAmount;
+        attackBuffAmount = buffAmount;
+        buffTurnsRemaining = buffTurns;
+        cout << "[LOG] 공격력 +" << buffAmount
+            << " 버프 적용 (" << buffTurns << "턴)\n";
+    }
+    
 }
 
 bool Character::hasActiveBuff() const
@@ -259,19 +262,19 @@ bool Character::removeItem(size_t index)
     return true;
 }
 
-bool Character::useRandomItem()
-{
-    if (inventory.empty())
-    {
-        cout << " [LOG] 사용할 수 있는 아이템이 없습니다. " << endl;
-        return false;
-    }
-
-
-
-
-    return false;
-}
+//bool Character::useRandomItem()
+//{
+//    if (inventory.empty())
+//    {
+//        cout << " [LOG] 사용할 수 있는 아이템이 없습니다. " << endl;
+//        return false;
+//    }
+//
+//
+//
+//
+//    return false;
+//}
 
 
 
