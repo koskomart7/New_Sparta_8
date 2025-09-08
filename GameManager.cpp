@@ -191,13 +191,12 @@ void GameManager::battle()
 				{	
 					bool isEmpty = !player->hasItems();
 
+					displayInv(isEmpty);
+
 					if (isEmpty)
 					{
-						displayInv(isEmpty);
 						break;
 					}
-
-					displayInv(isEmpty);
 
 					cout << "select Item : ";
 
