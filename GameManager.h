@@ -14,9 +14,9 @@ public:
 
 	Monster* spawnMonsters();
 
-	void battle();
+	Monster* spawnBoss();
 
-	void bossBattle();
+	void battle();
 
 	void attack(Monster*);
 

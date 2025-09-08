@@ -19,15 +19,7 @@ int main()
             break;
 
         case 2:
-            if (game.getPlayerLevel() >= 10) 
-            {
-                game.bossBattle();
-            }
-
-            else
-            {
-                game.battle();
-            }
+            game.battle();
             break;
 
         case 3:

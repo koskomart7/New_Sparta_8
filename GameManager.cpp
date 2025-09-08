@@ -6,6 +6,7 @@
 #include "GameManager.h"
 #include "Item.h"
 #include "Character.h"
+#include "BossMonster.h"
 #include "Monster.h"
 #include "Goblin.h"
 #include "Troll.h"
@@ -62,6 +63,21 @@ Monster* GameManager::spawnMonsters()
 	return monster;
 }
 
+Monster* GameManager::spawnBoss()
+{
+	Monster* boss = new BossMonster(12);
+
+	cout << endl;
+	cout << "\n===== WARNING =====" << endl;
+	cout << "Entering Boss Battle!" << endl;
+	cout << "===================\n" << endl;
+	
+	system("pause");
+	system("cls");
+
+	return boss;
+}
+
 void GameManager::battle() 
 {
 	int targetIdx = 0, enemySize = 0, earnedXP = 0, earnedGold = 0;
@@ -69,10 +85,18 @@ void GameManager::battle()
 	int selection;
 	vector<Monster*> enemy;
 
-	for (int i = 0; i < randomRange(1, 4); i++)
-	{
-		enemy.push_back(spawnMonsters());
+	if (player->getLevel() >= 10) {
+		enemy.push_back(spawnBoss());
 	}
+
+	else
+	{
+		for (int i = 0; i < randomRange(1, 4); i++)
+		{
+			enemy.push_back(spawnMonsters());
+		}
+	}
+	
 
 	while (true) // Battle Logics
 	{
@@ -208,7 +232,7 @@ void GameManager::battle()
 		if(!player->isAlive()) /* Losing condition. */
 		{
 			cout << "===== Battle Result ===== \n" << endl;
-			cout << "You have fallen..." << endl;
+			cout << "You have fallen...\n" << endl;
 
 			player->setCurrentHealth(20);
 
@@ -226,11 +250,6 @@ void GameManager::battle()
 			break;
 		}
 	}
-}
-
-void GameManager::bossBattle() 
-{
-	//Monster boss;
 }
 
 void GameManager::attack(Monster* target)
@@ -253,7 +272,8 @@ void GameManager::beingAttacked(Monster* monster)
 
 	cout << "===== Attack ===== \n" << endl;
 	cout << monster->getName() << " attacked you" << "!" << endl;
-	cout << " you have taken " << damage << " damage.\n" << endl;
+	cout << "You have taken " << damage << " damage." << endl;
+	cout << "HP remaining : " << player->getCurrentHealth() << "\n" << endl;
 
 	system("pause");
 	system("cls");
