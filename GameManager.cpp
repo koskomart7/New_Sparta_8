@@ -6,8 +6,10 @@
 #include "GameManager.h"
 
 #include "Item.h"
-#include "Shop.h"
+#include "HealthPotion.h"
+#include "AttackBoost.h"
 
+#include "Shop.h"
 #include "Character.h"
 
 #include "Monster.h"
@@ -119,7 +121,7 @@ void GameManager::battle()
 
 		cout << "\n --- Current HP : " << player->getCurrentHealth() << endl;
 
-		cout << "\n===== Behaviors =====\n" << endl;
+		cout << "===== Behaviors =====\n" << endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Use Item" << "\n" << endl;
 		cout << "Enter selection : ";
@@ -140,52 +142,56 @@ void GameManager::battle()
 			switch (selection)
 			{
 			case 1:
+				targetIdx = randomRange(0, enemySize);
+
+				//while (true)	// Attack Menu; Will be automated.
+				//{
+				//	cout << "===== Attack =====\n" << endl;
+				//	cout << "--- Enemies : " << enemySize << " left ---" << endl;
+
+				//	for (int i = 0; i < enemySize; i++)
+				//	{
+				//		cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
+				//	}
+
+				//	cout << "select Target : ";
+
+				//	cin >> targetIdx;
+
+				//	system("cls");
+
+				//	if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
+				//	{
+				//		cout << " invalid input." << endl;
+				//		cin.clear();
+				//		cin.ignore(10000, '\n');
+				//	}
+
+				//	else
+				//	{
+				//		break;
+				//	}
+				//}	// Attack Menu end
+
+				//targetIdx -= 1;
+
+			attack(enemy[targetIdx]);
+
+			if (enemySize <= 1) 
 			{
-				while (true)	// Attack Menu; Will be automated.
-				{
-					cout << "===== Attack =====\n" << endl;
-					cout << "--- Enemies : " << enemySize << " left ---" << endl;
-
-					for (int i = 0; i < enemySize; i++)
-					{
-						cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
-					}
-
-					cout << "select Target : ";
-
-					cin >> targetIdx;
-
-					system("cls");
-
-					if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
-					{
-						cout << " invalid input." << endl;
-						cin.clear();
-						cin.ignore(10000, '\n');
-					}
-
-					else
-					{
-						break;
-					}
-				}	// Attack Menu end
-
-				targetIdx -= 1;
-
-				attack(enemy[targetIdx]);
-
-				if (enemySize < 1) {
-					beingAttacked(enemy[randomRange(0, enemySize)]);
-				}
-				
-				else {
-					beingAttacked(enemy[targetIdx]);
-				}
-
-				++turns;
-
-				break;
+				beingAttacked(enemy.at(0));
 			}
+				
+			else 
+			{
+				beingAttacked(enemy[targetIdx]);
+			}
+
+			player->advanceTurn();
+
+			++turns;
+
+			break;
 
 			case 2:
 			{
@@ -202,13 +208,21 @@ void GameManager::battle()
 						break;
 					}
 
+					cout << "Type '0' to return." << endl;
 					cout << "select Item : ";
 
 					cin >> itemIdx;
 
+					--itemIdx;
+
 					system("cls");
 
-					if (cin.fail() || (itemIdx <= 0 || itemIdx > player->getInventorySize()))
+					if (itemIdx == -1)
+					{
+						continue;
+					}
+
+					if (cin.fail() || (itemIdx < -1 || itemIdx > player->getInventorySize()))
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
@@ -217,11 +231,25 @@ void GameManager::battle()
 
 					else
 					{
+						vector<Item*> inv = player->getInventory();
+
+						if (dynamic_cast<HealthPotion*> (inv[itemIdx]))
+						{
+							inv[itemIdx]->Use(player);
+						}
+
+						else if (dynamic_cast<AttackBoost*> (inv[itemIdx]))
+						{
+							inv[itemIdx]->Use(player);
+						}
+						
+						player->removeItem(++itemIdx);
+
 						break;
 					}
 				}
-			}
-				continue;
+			}	// Item Menu End
+				break;
 
 			default:
 				break;
@@ -232,6 +260,8 @@ void GameManager::battle()
 		{
 			cout << "===== Attack =====\n" << endl;
 			cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
+
+			logKill(enemy[targetIdx]);
 
 			earnedXP += enemy[targetIdx]->getDropExp();
 			earnedGold += enemy[targetIdx]->getDropGold();
@@ -357,6 +387,11 @@ void GameManager::displayStats() const
 	cout << "Exp : " << player->getExp() << endl;
 	cout << "Health : " << player->getCurrentHealth() << " / " << player->getMaxHealth() << endl;
 	cout << "Attack : " << player->getAttack() << "\n" << endl;
+
+	cout << "===== Play Log =====\n" << endl;
+	cout << "Goblin killed : " << killLogs[0] << endl;
+	cout << "Orc killed : " << killLogs[1] << endl;
+	cout << "Troll killed : " << killLogs[2] << "\n" << endl;
 
 	system("pause");
 	system("cls");
@@ -539,13 +574,19 @@ void callShopMenu(GameManager& game, Shop& shop)
 					shop.displayItems();
 					cout << "\n" << endl;
 					game.displayInv(false);
-					cout << "\nSelect item to buy : ";
+					cout << "\nType '0' to return." << endl;
+					cout << "Select item to buy : ";
 
 					cin >> selection;
 
 					system("cls");
 
-					if (cin.fail())
+					if (selection == 0)
+					{
+						break;
+					}
+
+					else if (cin.fail())
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
@@ -569,13 +610,19 @@ void callShopMenu(GameManager& game, Shop& shop)
 					shop.displayItems();
 					cout << "\n" << endl;
 					game.displayInv(false);
-					cout << "\nSelect item to Sell : ";
+					cout << "\nType '0' to return." << endl;
+					cout << "Select item to Sell : ";
 
 					cin >> selection;
 
 					system("cls");
 
-					if (cin.fail())
+					if (selection == 0)
+					{
+						break;
+					}
+
+					else if (cin.fail())
 					{
 						cout << " invalid input." << endl;
 						cin.clear();

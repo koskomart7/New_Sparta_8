@@ -1,5 +1,6 @@
 #include "Character.h"
 #include <iostream>
+#include <random>
 #include <algorithm>
 
 Character::Character(const string& characterName)
@@ -208,6 +209,16 @@ void Character::advanceTurn()
             cout << "'[LOG] 공격력 버프 만료 기본 공격력으로 회귀 : " << attack << endl;
         }
     }
+}
+
+void Character::dealBuffCalc(int buffAmount, int buffTurns)
+{
+    if (buffTurnsRemaining > 0) return;
+    attack += buffAmount;
+    attackBuffAmount = buffAmount;
+    buffTurnsRemaining = buffTurns;
+    cout << "[LOG] 공격력 +" << buffAmount
+        << " 버프 적용 (" << buffTurns << "턴)\n";
 }
 
 bool Character::hasActiveBuff() const
