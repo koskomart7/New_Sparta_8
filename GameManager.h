@@ -26,7 +26,7 @@ public:
 
 	void displayStats() const;
 
-	void displayInv() const;
+	void displayInv(bool) const;
 
 	void shoppingBuy(int, Shop&);
 
