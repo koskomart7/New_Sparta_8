@@ -5,7 +5,8 @@
 
 Character::Character(const string& characterName)
 	:name(characterName), level(1),currentHealth(200), 
-	maxHealth(200),attack(30), exp(0), gold(100)
+	maxHealth(200),attack(30), exp(0), gold(100),
+    attackBuffAmount(0), buffTurnsRemaining(0)
 {
 	
 }
@@ -194,6 +195,25 @@ void Character::heal(int amount)
     currentHealth += healedAmount;
     cout << name << " has recovered by " << healedAmount << ". "
         << "Current health: " << currentHealth << "/" << maxHealth << endl;
+}
+
+void Character::advanceTurn()
+{
+    if (buffTurnsRemaining > 0)
+    {
+        --buffTurnsRemaining;
+        if (buffTurnsRemaining == 0)
+        {
+            attack -= attackBuffAmount;
+            attackBuffAmount = 0;
+            cout << "'[LOG] 공격력 버프 만료 기본 공격력으로 회귀 : " << attack << endl;
+        }
+    }
+}
+
+bool Character::hasActiveBuff() const
+{
+    return buffTurnsRemaining > 0;
 }
 
 bool Character::spendGold(int amount)

@@ -30,6 +30,8 @@ private:
     int exp;
     int gold;     
     vector<Item*> inventory;
+    int attackBuffAmount;   // 현재 적용된 버프 공격력    
+    int buffTurnsRemaining; // 남은 버프 지속 턴 수 
 
     static const int EXP_FOR_LEVELUP = 100;
     static const int MAX_LEVEL = 10;
@@ -61,6 +63,7 @@ public:
     void setExp(int newExp);
     void setGold(int newGold);
     
+    // 함수
     //void displayStatus() const;
     bool isAlive() const { return currentHealth > 0; }
 
@@ -68,11 +71,12 @@ public:
     bool canLevelUp() const { return exp >= EXP_FOR_LEVELUP && level < MAX_LEVEL; }
     void levelUp(); 
 
-
     void takeDamage(int damage);
     void heal(int amount); 
     int dealDamage() const { return attack; }
-
+    // 버프관련
+    void advanceTurn(); // 턴이 끝날 때마다 호출
+    bool hasActiveBuff() const;
 
     void addGold(int amount) { gold += amount; }
     bool spendGold(int amount);  
@@ -80,7 +84,7 @@ public:
     
     void addItem(Item* item);   // remove Item 추가 구현 
     bool removeItem(size_t index); // 인벤토리에서 지정 인덱스의 아이템 삭제
-    bool hasItems() const
+    bool hasItems() const       // 인벤토리가 비었는지 유무 확인 함수 
     {
         return !inventory.empty();
     }
