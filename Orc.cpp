@@ -1,6 +1,10 @@
 #include "Orc.h"
 #include "rangeRd.h"
+#include "Item.h"
+#include "AttackBoost.h"
+
 #define RANDOM_MIN_ZERO 0
+#define RANDOM_MIN_ONE 1
 #define RANDOM_MAX_PLUS_10 11
 #define RANDOM_MAX_PLUS_5 6
 
@@ -17,7 +21,12 @@ Orc::~Orc()
 {
 }
 
-//Item* Orc::dropItem()
-//{
-//	return nullptr;
-//}
+Item* Orc::dropItem()
+{
+	Item* item = nullptr;
+	if (randomRange(RANDOM_MIN_ONE, RANDOM_MAX_PLUS_10) < 4)
+	{
+		item = new AttackBoost();
+	}
+	return item;
+}
