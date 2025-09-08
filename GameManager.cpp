@@ -187,9 +187,11 @@ void GameManager::battle()
 				beingAttacked(enemy[targetIdx]);
 			}
 
-				++turns;
+			player->advanceTurn();
 
-				break;
+			++turns;
+
+			break;
 
 			case 2:
 			{
