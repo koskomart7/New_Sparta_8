@@ -4,10 +4,14 @@
 
 #include "rangeRd.h"
 #include "GameManager.h"
+
 #include "Item.h"
+#include "Shop.h"
+
 #include "Character.h"
-#include "BossMonster.h"
+
 #include "Monster.h"
+#include "BossMonster.h"
 #include "Goblin.h"
 #include "Troll.h"
 #include "Orc.h"
@@ -315,9 +319,14 @@ void GameManager::displayStats() const
 	system("cls");
 }
 
-void GameManager::shopping()
+void GameManager::shoppingBuy(int idx, Shop& shop)
 {
-	// shop
+	shop.buyItem(idx, player);
+}
+
+void GameManager::shoppingSell(int idx, Shop& shop)
+{
+	shop.sellItem(idx, player->getInventory());
 }
 
 Character* characterCreation() 
@@ -421,6 +430,101 @@ void callPlayerMenu(GameManager& game)
 				break;
 			case 2:
 				game.displayInv();
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (selection == 3) {
+			break;
+		}
+	}
+}
+
+void callShopMenu(GameManager& game, Shop& shop)
+{
+	int selection;
+
+	while (true)
+	{
+		cout << "===== Shop =====\n" << endl;
+		shop.displayItems();
+		cout << "\n1. Buy Item" << endl;
+		cout << "2. Sell Item" << endl;
+		cout << "3. Return\n" << endl;
+		cout << "Enter selection : ";
+
+		cin >> selection;
+
+		system("cls");
+
+		if (cin.fail() || (selection < 0 || selection > 3))
+		{
+			cout << " invalid input." << endl;
+			cin.clear();
+			cin.ignore(10000, '\n');
+		}
+
+		else
+		{
+			switch (selection)
+			{
+			case 1:
+			{
+				while (true)
+				{
+					cout << "===== Shop =====\n" << endl;
+					shop.displayItems();
+					cout << "\nSelect item to buy : ";
+
+					cin >> selection;
+
+					system("cls");
+
+					if (cin.fail())
+					{
+						cout << " invalid input." << endl;
+						cin.clear();
+						cin.ignore(10000, '\n');
+					}
+
+					else
+					{
+						game.shoppingBuy(selection, shop);
+						break;
+					}
+				}
+				break;
+			}
+				
+			case 2:
+			{
+				while (true)
+				{
+					cout << "===== Shop =====\n" << endl;
+					shop.displayItems();
+					cout << "\nSelect item to Sell : ";
+
+					cin >> selection;
+
+					system("cls");
+
+					if (cin.fail())
+					{
+						cout << " invalid input." << endl;
+						cin.clear();
+						cin.ignore(10000, '\n');
+					}
+
+					else
+					{
+						game.shoppingBuy(selection, shop);
+						break;
+					}
+				}
+				break;
+			}
 				break;
 			default:
 				break;
