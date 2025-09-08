@@ -165,12 +165,11 @@ void GameManager::battle()
 
 		if(enemy.at(targetIdx)->getHealth() <= 0)
 		{
-			//it'll be a part to get level from dead monster then add to earned XP and gold.
 			cout << "===== Attack =====\n" << endl;
 			cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
 
-			earnedXP += (randomRange(50, 80) * enemy[targetIdx]->getHealth());		// Need getLevel() for Monsters.
-			earnedGold += (randomRange(20, 150) * enemy[targetIdx]->getHealth());	// Need getLevel() for Monsters.
+			earnedXP += enemy[targetIdx]->getDropExp();
+			earnedGold += enemy[targetIdx]->getDropGold();
 
 			delete enemy.at(targetIdx);
 			enemy[targetIdx] = nullptr;
@@ -187,7 +186,6 @@ void GameManager::battle()
 			cout << "You have won the battle!" << endl;
 
 			player->addGold(earnedGold);
-			player->addExp(earnedXP);
 
 			cout << "You have earned " << earnedXP << " XP, " << earnedGold << " Golds.\n" << endl;
 
@@ -243,15 +241,15 @@ void GameManager::attack(Monster* target)
 	cout << "===== Attack ===== \n" << endl;
 	cout << "Attacking " << target->getName() << "!" << endl;
 	cout << target->getName() << " has taken " << damage << " damage.\n" << endl;
-
+	
 	system("pause");
 	system("cls");
 }
 
 void GameManager::beingAttacked(Monster* monster)
 {
-	int damage = monster->getAttack() + randomRange(0, 4);
-	player->setCurrentHealth(player->getCurrentHealth() - damage);
+	int damage = monster->getAttack() + randomRange(-4, 4);
+	player->takeDamage(damage);
 
 	cout << "===== Attack ===== \n" << endl;
 	cout << monster->getName() << " attacked you" << "!" << endl;
