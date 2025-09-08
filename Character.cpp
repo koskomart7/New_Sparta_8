@@ -166,9 +166,8 @@ void Character::validateAndUpdateStats()
 void Character::takeDamage(int damage)
 {
     currentHealth = max(0, currentHealth - damage);
-    cout << name << " has received " << damage << " damage. " 
-        << " Remain HP : " << currentHealth << endl;
 }
+
 
 void Character::heal(int amount)
 {
