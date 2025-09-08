@@ -3,6 +3,8 @@
 #include "Monster.h"
 #include "Character.h"
 
+class Shop;
+
 class GameManager {
 private:
 	Character* player;
@@ -26,7 +28,9 @@ public:
 
 	void displayInv() const;
 
-	void shopping();
+	void shoppingBuy(int, Shop&);
+
+	void shoppingSell(int, Shop&);
 
 	inline int getPlayerLevel() { return player->getLevel(); }
 };
@@ -36,3 +40,5 @@ Character* characterCreation();
 int callMainMenu();
 
 void callPlayerMenu(GameManager&);
+
+void callShopMenu(GameManager& game, Shop& shop);

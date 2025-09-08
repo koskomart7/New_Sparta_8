@@ -2,12 +2,14 @@
 
 #include "rangeRd.h"
 #include "GameManager.h"
+#include "Shop.h"
 
 int main()
 {
     srand((unsigned int)time(NULL)); //set random seed from system time.
 
     GameManager game(characterCreation());
+    Shop shop;
     
     while (true) {
         int selection = callMainMenu();
@@ -23,7 +25,7 @@ int main()
             break;
 
         case 3:
-            // shop here
+            callShopMenu(game, shop);
             break;
 
         case 4:
