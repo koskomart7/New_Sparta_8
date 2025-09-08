@@ -28,7 +28,7 @@ public:
 	void setHealth(int health);
 	void setAttack(int attack);
 	void setDropExp(int dropExp);
-	void getDropGold(int dropGold);
+	void setDropGold(int dropGold);
 
 	void takeDamage(int damage);
 	//virtual Item* dropItem();

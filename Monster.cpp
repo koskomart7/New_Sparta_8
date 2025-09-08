@@ -59,7 +59,7 @@ void Monster::setDropExp(int dropExp)
 	this->dropExp = dropExp;
 }
 
-void Monster::getDropGold(int dropGold)
+void Monster::setDropGold(int dropGold)
 {
 	this->dropGold = dropGold;
 }
