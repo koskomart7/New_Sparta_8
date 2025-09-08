@@ -73,9 +73,11 @@ public:
 
     void takeDamage(int damage);
     void heal(int amount); 
-    int dealDamage() const { return attack; }
+    //int dealDamage() const { return attack; }
+    
     // 버프관련
     void advanceTurn(); // 턴이 끝날 때마다 호출
+    void dealBuffCalc(int buffAmount, int buffTurns);       // 딜버프 물약 효과 검증 및 계산 함수 
     bool hasActiveBuff() const;
 
     void addGold(int amount) { gold += amount; }

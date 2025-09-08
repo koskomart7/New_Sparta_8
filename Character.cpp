@@ -211,6 +211,16 @@ void Character::advanceTurn()
     }
 }
 
+void Character::dealBuffCalc(int buffAmount, int buffTurns)
+{
+    if (buffTurnsRemaining > 0) return;
+    attack += buffAmount;
+    attackBuffAmount = buffAmount;
+    buffTurnsRemaining = buffTurns;
+    cout << "[LOG] 공격력 +" << buffAmount
+        << " 버프 적용 (" << buffTurns << "턴)\n";
+}
+
 bool Character::hasActiveBuff() const
 {
     return buffTurnsRemaining > 0;
