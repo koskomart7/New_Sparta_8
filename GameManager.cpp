@@ -140,52 +140,54 @@ void GameManager::battle()
 			switch (selection)
 			{
 			case 1:
+				targetIdx = randomRange(0, enemySize);
+
+				//while (true)	// Attack Menu; Will be automated.
+				//{
+				//	cout << "===== Attack =====\n" << endl;
+				//	cout << "--- Enemies : " << enemySize << " left ---" << endl;
+
+				//	for (int i = 0; i < enemySize; i++)
+				//	{
+				//		cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
+				//	}
+
+				//	cout << "select Target : ";
+
+				//	cin >> targetIdx;
+
+				//	system("cls");
+
+				//	if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
+				//	{
+				//		cout << " invalid input." << endl;
+				//		cin.clear();
+				//		cin.ignore(10000, '\n');
+				//	}
+
+				//	else
+				//	{
+				//		break;
+				//	}
+				//}	// Attack Menu end
+
+				//targetIdx -= 1;
+
+			attack(enemy[targetIdx]);
+
+			if (enemySize <= 1) 
 			{
-				while (true)	// Attack Menu; Will be automated.
-				{
-					cout << "===== Attack =====\n" << endl;
-					cout << "--- Enemies : " << enemySize << " left ---" << endl;
-
-					for (int i = 0; i < enemySize; i++)
-					{
-						cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
-					}
-
-					cout << "select Target : ";
-
-					cin >> targetIdx;
-
-					system("cls");
-
-					if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
-					{
-						cout << " invalid input." << endl;
-						cin.clear();
-						cin.ignore(10000, '\n');
-					}
-
-					else
-					{
-						break;
-					}
-				}	// Attack Menu end
-
-				targetIdx -= 1;
-
-				attack(enemy[targetIdx]);
-
-				if (enemySize < 1) {
-					beingAttacked(enemy[randomRange(0, enemySize)]);
-				}
+				beingAttacked(enemy.at(0));
+			}
 				
-				else {
-					beingAttacked(enemy[targetIdx]);
-				}
+			else 
+			{
+				beingAttacked(enemy[targetIdx]);
+			}
 
 				++turns;
 
 				break;
-			}
 
 			case 2:
 			{
