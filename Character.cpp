@@ -22,6 +22,11 @@ Character::~Character()
 
 //setter function
 
+size_t Character::getInventorySize() const
+{
+    return inventory.size();
+}
+
 void Character::setName(const string& PlayerName)
 {
 	name = PlayerName;
@@ -208,6 +213,17 @@ void Character::addItem(Item* item)
         inventory.push_back(item);
     }
 }
+
+bool Character::useRandomItem()
+{
+    if (inventory.empty())
+    {
+        cout << " [LOG] 사용할 수 있는 아이템이 없습니다. " << endl;
+        return false;
+    }
+    return false;
+}
+
 
 
 

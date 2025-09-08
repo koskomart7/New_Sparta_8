@@ -50,7 +50,8 @@ public:
     int getAttack() const { return attack; }
     int getExp() const { return exp; }
     int getGold() const { return gold; }
-    const vector<Item*> getInventory() const { return inventory; }
+    vector<Item*> getInventory() const { return inventory; }
+    size_t getInventorySize() const;
 
     //setter fuction
     void setName(const string& PlayerName);
@@ -76,14 +77,14 @@ public:
     void addGold(int amount) { gold += amount; }
     bool spendGold(int amount);  
 
-
-    void addItem(Item* item);  
+    
+    void addItem(Item* item);   // remove Item 추가 구현   
     bool hasItems() const
     {
         return !inventory.empty();
     }
     //void displayInventory() const;
-    bool useRandomItem() {};  //
+    bool useRandomItem();  //
     bool sellItem(int index, vector<Item*> Inventory) {};  // Modified with a parameter vector inventory
 
   
