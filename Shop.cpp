@@ -24,16 +24,22 @@ void Shop::displayItems() const
 
 void Shop::buyItem(int index, Character* player)
 {
+    if  (index < 1 || stock_.size() < index)
+    {
+        cout << "Invalid item Item Number.\n";
+        return;
+	}
+
     if (player->getGold() >= (*stock_[index]).getPrice())
     {
 		Item* item = nullptr;
 
         switch (index)
         {
-            case 0:
+            case 1:
 				item = new HealthPotion();
                 break;
-			case 1:
+			case 2:
                 item = new AttackBoost();
 				break;
             default:
@@ -54,17 +60,29 @@ void Shop::buyItem(int index, Character* player)
     }
 }
 
-int Shop::sellItem(int index, vector<Item*> invantory)
+int Shop::sellItem(int index, Character* player)
 {
-        for (int i = 0; i < stock_.size(); i++)
+    if (index < 0 || index >= player->getInventory().size())
+    {
+        cout << "Invalid item Item Number.\n";
+		return 0;
+    }
+
+    for (int i = 0; i < stock_.size(); i++)
+    {
+        if (player->getInventory()[index]->getName() == stock_[i]->getName())
         {
-            if (invantory[index]->getName() == stock_[i]->getName())
-            {
-                cout << "Sold " << invantory[index]->getName() << " - "
-                    << (stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100 << " Gold \n";
-                return stock_[i]->getPrice();
-            }
+            cout << "Sold " << player->getInventory()[index]->getName() << " - "
+                 << (stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100 << " Gold \n";
+
+            player->addGold((stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100);
+			player->getInventory().erase(player->getInventory().begin() + index);
+            //delete player->getInventory()[index];
+            //player->getInventory().erase(player->getInventory().begin() + index);
+
+            return stock_[i]->getPrice() * SELL_RATE_PERCENT / 100;
         }
-		cout << "Item not found in shop.\n";
+    }
+	cout << "Item not found in shop.\n";
 return 0;
 }
