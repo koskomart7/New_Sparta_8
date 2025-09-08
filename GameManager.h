@@ -31,8 +31,6 @@ public:
 	void shoppingBuy(int, Shop&);
 
 	void shoppingSell(int, Shop&);
-
-	inline int getPlayerLevel() { return player->getLevel(); }
 };
 
 Character* characterCreation();
