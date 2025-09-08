@@ -6,8 +6,10 @@
 #include "GameManager.h"
 
 #include "Item.h"
-#include "Shop.h"
+#include "HealthPotion.h"
+#include "AttackBoost.h"
 
+#include "Shop.h"
 #include "Character.h"
 
 #include "Monster.h"
@@ -209,7 +211,14 @@ void GameManager::battle()
 
 					cin >> itemIdx;
 
+					--itemIdx;
+
 					system("cls");
+
+					if (itemIdx == -1)
+					{
+						continue;
+					}
 
 					if (cin.fail() || (itemIdx < 0 || itemIdx > player->getInventorySize()))
 					{
@@ -220,11 +229,25 @@ void GameManager::battle()
 
 					else
 					{
+						vector<Item*> inv = player->getInventory();
+
+						if (dynamic_cast<HealthPotion*> (inv[itemIdx]))
+						{
+							inv[itemIdx]->Use(player);
+						}
+
+						else if (dynamic_cast<AttackBoost*> (inv[itemIdx]))
+						{
+							inv[itemIdx]->Use(player);
+						}
+						
+						player->removeItem(itemIdx);
+
 						break;
 					}
 				}
 			}	// Item Menu End
-				continue;
+				break;
 
 			default:
 				break;
