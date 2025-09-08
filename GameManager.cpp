@@ -203,7 +203,7 @@ void GameManager::battle()
 
 					system("cls");
 
-					if (cin.fail() || (itemIdx <= 0 || itemIdx > ))
+					if (cin.fail() || (itemIdx <= 0 || itemIdx > player->getInventorySize()))
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
