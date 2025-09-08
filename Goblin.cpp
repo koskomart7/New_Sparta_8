@@ -1,6 +1,10 @@
 #include "Goblin.h"
 #include "rangeRd.h"
+#include "Item.h"
+#include "HealthPotion.h"
+
 #define RANDOM_MIN_ZERO 0
+#define RANDOM_MIN_ONE 1
 #define RANDOM_MAX_PLUS_10 11
 #define RANDOM_MAX_PLUS_5 6
 
@@ -18,7 +22,12 @@ Goblin::~Goblin()
 }
 	
 
-//Item* Goblin::dropItem()
-//{
-//	return nullptr;
-//}
+Item* Goblin::dropItem()
+{
+	Item* item = nullptr;
+	if (randomRange(RANDOM_MIN_ONE, RANDOM_MAX_PLUS_10) < 4)
+	{
+		item = new HealthPotion();
+	}
+	return item;
+}

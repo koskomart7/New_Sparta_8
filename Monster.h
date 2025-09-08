@@ -31,5 +31,5 @@ public:
 	void setDropGold(int dropGold);
 
 	void takeDamage(int damage);
-	//virtual Item* dropItem();
+	virtual Item* dropItem() = 0;
 };

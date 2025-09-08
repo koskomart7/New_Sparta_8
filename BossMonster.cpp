@@ -1,6 +1,9 @@
 #include "BossMonster.h"
 #include "rangeRd.h"
+#include "Item.h"
+
 #define RANDOM_MIN_ZERO 0
+#define RANDOM_MIN_ONE 1
 #define RANDOM_MAX_PLUS_10 11
 #define RANDOM_MAX_PLUS_5 6
 #define BOSS_RANDOM_MIN 1.0
@@ -24,7 +27,8 @@ BossMonster::~BossMonster()
 {
 }
 
-//Item* BossMonster::dropItem()
-//{
-//	return nullptr;
-//}
+Item* BossMonster::dropItem()
+{
+	return nullptr;
+}
+
