@@ -13,9 +13,22 @@ HealthPotion::~HealthPotion()
 {
 }
 
+int HealthPotion::getRestoreValue()
+{
+	return healthRestore;
+}
+
+void HealthPotion::setRestoreValue(int healthRestore)
+{
+	this->healthRestore = healthRestore;
+}
+
 void HealthPotion::Use(Character* character)
 {
-	character->setCurrentHealth(healthRestore);
+	if (character != nullptr)
+	{
+		character->heal(healthRestore);
+	}
 }
 
 void HealthPotion::ItemEffect()
