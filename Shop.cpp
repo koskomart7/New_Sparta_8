@@ -17,7 +17,7 @@ void Shop::displayItems() const
 {
     for (int i = 0; i < stock_.size(); i++)
     {
-		cout << stock_[i]->getName() << " - " 
+		cout << i+1 << ". - " << stock_[i]->getName() << " - "
              << stock_[i]->getPrice() << "Gold\n" << endl;
     }
 }
@@ -30,7 +30,7 @@ void Shop::buyItem(int index, Character* player)
         return;
 	}
 
-    if (player->getGold() >= (*stock_[index]).getPrice())
+    if (player->getGold() >= (*stock_[index-1]).getPrice())
     {
 		Item* item = nullptr;
 
@@ -49,7 +49,7 @@ void Shop::buyItem(int index, Character* player)
 		player->addItem(item);
 
         //player->addItem(stock_[index]);
-        player->spendGold(stock_[index]->getPrice());
+        player->spendGold(stock_[index-1]->getPrice());
         cout << "Purchased complete!\n"
             << "Gold Remaining : " << player->getGold();
     }
@@ -62,7 +62,7 @@ void Shop::buyItem(int index, Character* player)
 
 int Shop::sellItem(int index, Character* player)
 {
-    if (index < 0 || index >= player->getInventory().size())
+    if (index < 1 || player->getInventory().size() < index)
     {
         cout << "Invalid item Item Number.\n";
 		return 0;
@@ -70,13 +70,13 @@ int Shop::sellItem(int index, Character* player)
 
     for (int i = 0; i < stock_.size(); i++)
     {
-        if (player->getInventory()[index]->getName() == stock_[i]->getName())
+        if (player->getInventory()[index-1]->getName() == stock_[i]->getName())
         {
-            cout << "Sold " << player->getInventory()[index]->getName() << " - "
+            cout << "Sold " << player->getInventory()[index-1]->getName() << " - "
                  << (stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100 << " Gold \n";
 
             player->addGold((stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100);
-			player->getInventory().erase(player->getInventory().begin() + index);
+			player->removeItem(index);
             //delete player->getInventory()[index];
             //player->getInventory().erase(player->getInventory().begin() + index);
 
