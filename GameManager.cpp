@@ -113,6 +113,8 @@ void GameManager::battle()
 			cout << i + 1 << " - " << enemy.at(i)->getName() << endl;
 		}
 
+		cout << "\n --- Current HP : " << player->getCurrentHealth() << endl;
+
 		cout << "\n===== Behaviors =====\n" << endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Use Item" << "\n" << endl;
