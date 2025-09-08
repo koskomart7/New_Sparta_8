@@ -233,6 +233,8 @@ void GameManager::battle()
 			cout << "===== Attack =====\n" << endl;
 			cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
 
+			logKill(enemy[targetIdx]);
+
 			earnedXP += enemy[targetIdx]->getDropExp();
 			earnedGold += enemy[targetIdx]->getDropGold();
 
@@ -357,6 +359,11 @@ void GameManager::displayStats() const
 	cout << "Exp : " << player->getExp() << endl;
 	cout << "Health : " << player->getCurrentHealth() << " / " << player->getMaxHealth() << endl;
 	cout << "Attack : " << player->getAttack() << "\n" << endl;
+
+	cout << "===== Play Log =====\n" << endl;
+	cout << "Goblin killed : " << killLogs[0] << endl;
+	cout << "Orc killed : " << killLogs[1] << endl;
+	cout << "Troll killed : " << killLogs[2] << "\n" << endl;
 
 	system("pause");
 	system("cls");
