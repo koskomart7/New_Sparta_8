@@ -519,7 +519,7 @@ void callShopMenu(GameManager& game, Shop& shop)
 
 					else
 					{
-						game.shoppingBuy(selection, shop);
+						game.shoppingSell(selection, shop);
 						break;
 					}
 				}
