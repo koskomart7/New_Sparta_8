@@ -100,7 +100,6 @@ void GameManager::battle()
 			enemy.push_back(spawnMonsters());
 		}
 	}
-	
 
 	while (true) // Battle Logics
 	{
@@ -183,7 +182,40 @@ void GameManager::battle()
 			}
 
 			case 2:
-				// Item fuction here.
+			{
+				int itemIdx;
+
+				while (true)	// Item Menu
+				{	
+					bool isEmpty = !player->hasItems();
+
+					if (isEmpty)
+					{
+						displayInv(isEmpty);
+						break;
+					}
+
+					displayInv(isEmpty);
+
+					cout << "select Item : ";
+
+					cin >> itemIdx;
+
+					system("cls");
+
+					if (cin.fail() || (itemIdx <= 0 || itemIdx > ))
+					{
+						cout << " invalid input." << endl;
+						cin.clear();
+						cin.ignore(10000, '\n');
+					}
+
+					else
+					{
+						break;
+					}
+				}
+			}
 				continue;
 
 			default:
@@ -283,7 +315,7 @@ void GameManager::beingAttacked(Monster* monster)
 	system("cls");
 }
 
-void GameManager::displayInv() const
+void GameManager::displayInv(bool isPaused) const
 {
 	vector<Item*> inv = player->getInventory();
 
@@ -296,14 +328,20 @@ void GameManager::displayInv() const
 
 	else
 	{
+		int idx = 1;
 		for (auto invIt : inv) 
 		{
-			cout << invIt->getName() << endl;
+			cout << idx << " - " << invIt->getName() << endl;
+			++idx;
 		}
 	}
 
-	system("pause");
-	system("cls");
+	cout << "\nGold : " << player->getGold() << "\n" << endl;
+
+	if (isPaused) {
+		system("pause");
+		system("cls");
+	}
 }
 
 void GameManager::displayStats() const
@@ -326,7 +364,7 @@ void GameManager::shoppingBuy(int idx, Shop& shop)
 
 void GameManager::shoppingSell(int idx, Shop& shop)
 {
-	shop.sellItem(idx, player->getInventory());
+	shop.sellItem(idx, player);
 }
 
 Character* characterCreation() 
@@ -429,7 +467,7 @@ void callPlayerMenu(GameManager& game)
 				game.displayStats();
 				break;
 			case 2:
-				game.displayInv();
+				game.displayInv(true);
 				break;
 			default:
 				break;

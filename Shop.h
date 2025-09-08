@@ -21,5 +21,5 @@ public:
 
     void buyItem(int index, Character* player);
 
-    int sellItem(int index, vector<Item*> invantory);
+    int sellItem(int index, Character* player);
 };
