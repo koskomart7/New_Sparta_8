@@ -18,7 +18,11 @@
 
 using namespace std;
 
-GameManager::GameManager(Character* newPlayer) : player(newPlayer) {};
+GameManager::GameManager(Character* newPlayer) : player(newPlayer) 
+{
+	killLogs.assign(3, 0);
+	playLogs.assign(2, 0);
+};
 
 GameManager::~GameManager() 
 {
@@ -368,6 +372,24 @@ void GameManager::shoppingSell(int idx, Shop& shop)
 	shop.sellItem(idx, player);
 }
 
+void GameManager::logKill(Monster* target)
+{
+	if (dynamic_cast<Goblin*>(target))
+	{
+		++killLogs[0];
+	}
+
+	else if (dynamic_cast<Orc*>(target))
+	{
+		++killLogs[1];
+	}
+
+	else if (dynamic_cast<Troll*>(target))
+	{
+		++killLogs[2];
+	}
+}
+
 Character* characterCreation() 
 {
 	string name;
@@ -515,6 +537,8 @@ void callShopMenu(GameManager& game, Shop& shop)
 				{
 					cout << "===== Shop =====\n" << endl;
 					shop.displayItems();
+					cout << "\n" << endl;
+					game.displayInv(false);
 					cout << "\nSelect item to buy : ";
 
 					cin >> selection;
@@ -543,6 +567,8 @@ void callShopMenu(GameManager& game, Shop& shop)
 				{
 					cout << "===== Shop =====\n" << endl;
 					shop.displayItems();
+					cout << "\n" << endl;
+					game.displayInv(false);
 					cout << "\nSelect item to Sell : ";
 
 					cin >> selection;

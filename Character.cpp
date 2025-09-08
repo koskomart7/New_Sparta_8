@@ -1,6 +1,5 @@
 #include "Character.h"
 #include <iostream>
-#include <random>
 #include <algorithm>
 
 Character::Character(const string& characterName)
