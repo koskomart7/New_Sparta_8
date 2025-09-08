@@ -211,16 +211,16 @@ void GameManager::battle()
 
 					cin >> itemIdx;
 
-					//--itemIdx;
+					--itemIdx;
 
 					system("cls");
 
-					if (itemIdx == 0)
+					if (itemIdx == -1)
 					{
 						continue;
 					}
 
-					if (cin.fail() || (itemIdx < 0 || itemIdx > player->getInventorySize()))
+					if (cin.fail() || (itemIdx < -1 || itemIdx > player->getInventorySize()))
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
@@ -233,15 +233,15 @@ void GameManager::battle()
 
 						if (dynamic_cast<HealthPotion*> (inv[itemIdx]))
 						{
-							inv[--itemIdx]->Use(player);
+							inv[itemIdx]->Use(player);
 						}
 
 						else if (dynamic_cast<AttackBoost*> (inv[itemIdx]))
 						{
-							inv[--itemIdx]->Use(player);
+							inv[itemIdx]->Use(player);
 						}
 						
-						player->removeItem(itemIdx);
+						player->removeItem(++itemIdx);
 
 						break;
 					}
