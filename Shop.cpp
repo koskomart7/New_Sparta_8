@@ -26,7 +26,7 @@ void Shop::buyItem(int index, Character* player)
 {
     if  (index < 1 || stock_.size() < index)
     {
-        cout << "Invalid item Item Number.\n";
+        cout << "**Invalid item Item Number.**\n";
         return;
 	}
 
@@ -50,13 +50,13 @@ void Shop::buyItem(int index, Character* player)
 
         //player->addItem(stock_[index]);
         player->spendGold(stock_[index-1]->getPrice());
-        cout << "Purchased complete!\n"
-            << "Gold Remaining : " << player->getGold();
+        cout << "==| Purchased complete! |==\n"
+            << "==| Gold Remaining : " << player->getGold() << " |==\n";
     }
     else
     {
-        cout << "Not enough Gold.\n"
-            << "Gold Remaining : " << player->getGold();
+        cout << "==| Not enough Gold. |==\n"
+            << "==| Gold Remaining : " << player->getGold() << " |==\n";
     }
 }
 
@@ -64,7 +64,7 @@ int Shop::sellItem(int index, Character* player)
 {
     if (index < 1 || player->getInventory().size() < index)
     {
-        cout << "Invalid item Item Number.\n";
+        cout << "==| Invalid item Item Number. |==\n";
 		return 0;
     }
 
@@ -72,8 +72,8 @@ int Shop::sellItem(int index, Character* player)
     {
         if (player->getInventory()[index-1]->getName() == stock_[i]->getName())
         {
-            cout << "Sold " << player->getInventory()[index-1]->getName() << " - "
-                 << (stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100 << " Gold \n";
+            cout << "==| Sold " << player->getInventory()[index-1]->getName() << " - "
+                 << (stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100 << " Gold |==\n";
 
             player->addGold((stock_[i]->getPrice() * SELL_RATE_PERCENT) / 100);
 			player->removeItem(index);
@@ -83,6 +83,6 @@ int Shop::sellItem(int index, Character* player)
             return stock_[i]->getPrice() * SELL_RATE_PERCENT / 100;
         }
     }
-	cout << "Item not found in shop.\n";
+	cout << "===| Item not found in shop. |===\n";
 return 0;
 }
