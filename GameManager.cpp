@@ -281,17 +281,13 @@ void GameManager::battle()
 			cout << "You have won the battle!" << endl;
 
 			player->addGold(earnedGold);
+			player->addExp(earnedXP);
 
 			cout << "You have earned " << earnedXP << " XP, " << earnedGold << " Golds.\n" << endl;
 
 			if (player->canLevelUp()) 
 			{
 				player->levelUp();
-				player->addExp(earnedXP);
-			}
-			else
-			{
-				player->addExp(earnedXP);
 			}
 
 			system("pause");
