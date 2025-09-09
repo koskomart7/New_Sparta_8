@@ -143,38 +143,42 @@ void GameManager::battle()
 			switch (selection)
 			{
 			case 1:
-				//targetIdx = randomRange(0, enemySize);
+				targetIdx = randomRange(0, enemySize);
 
-				while (true)	// Attack Menu; Will be automated.
-				{
-					/*cout << "===== Attack =====\n" << endl;
-					cout << "--- Enemies : " << enemySize << " left ---" << endl;
+				//while (true)	// Attack Menu; Will be automated.
+				//{
+				//	cout << "===== Attack =====\n" << endl;
+				//	cout << "--- Enemies : " << enemySize << " left ---" << endl;
 
-					for (int i = 0; i < enemySize; i++)
-					{
-						cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
-					}*/
+				//	for (int i = 0; i < enemySize; i++)
+				//	{
+				//		cout << i + 1 << ". ";
+				//		enemy.at(i)->displayStats();
+				//	}
+				//	cout << "\n--- Player ---" << endl;
+				//	cout << "ATK : " << player->getAttack() << endl;
+				//	cout << "HP : " << player->getCurrentHealth() << endl;
 
-					cout << "select Target : ";
+				//	cout << "\nselect Target : ";
 
-					cin >> targetIdx;
+				//	cin >> targetIdx;
 
-					system("cls");
+				//	system("cls");
 
-					if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
-					{
-						cout << " invalid input." << endl;
-						cin.clear();
-						cin.ignore(10000, '\n');
-					}
+				//	if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
+				//	{
+				//		cout << " invalid input." << endl;
+				//		cin.clear();
+				//		cin.ignore(10000, '\n');
+				//	}
 
-					else
-					{
-						break;
-					}
-				}	// Attack Menu end
+				//	else
+				//	{
+				//		break;
+				//	}
+				//}	// Attack Menu end
 
-				targetIdx -= 1;
+				//targetIdx -= 1;
 
 			attack(enemy[targetIdx]);
 
@@ -626,7 +630,7 @@ void callShopMenu(GameManager& game, Shop& shop)
 				while (true)
 				{
 					cout << "===== Shop =====\n" << endl;
-					shop.displayItems();
+					shop.displayItems(60);
 					cout << "\n" << endl;
 					game.displayInv(false);
 					cout << "\nType '0' to return." << endl;
