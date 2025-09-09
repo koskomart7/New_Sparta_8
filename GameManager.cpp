@@ -39,12 +39,12 @@ Monster* GameManager::spawnMonsters()
 
 	if (player->getLevel() <= 2) 
 	{
-		enemyLv = player->getLevel() + randomRange(0, 2);
+		enemyLv = player->getLevel() +randomRange(0, 2);
 	}
 
 	else
 	{
-		enemyLv = player->getLevel() + randomRange(-3, 3);
+		enemyLv = player->getLevel() +randomRange(-3, 3);
 	}
 
 	while (!monster)
@@ -116,12 +116,14 @@ void GameManager::battle()
 
 		for (int i = 0; i < enemySize; i++)
 		{
-			cout << i + 1 << " - " << enemy.at(i)->getName() << endl;
+			cout << i + 1 << ". ";
+			enemy.at(i)->displayStats();
 		}
+		cout << "\n--- Player ---"  << endl;
+		cout << "ATK : " << player->getAttack() << endl;
+		cout << "HP : " << player->getCurrentHealth() << endl;
 
-		cout << "\n --- Current HP : " << player->getCurrentHealth() << endl;
-
-		cout << "===== Behaviors =====\n" << endl;
+		cout << "\n===== Behaviors =====\n" << endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Use Item" << "\n" << endl;
 		cout << "Enter selection : ";
@@ -142,42 +144,70 @@ void GameManager::battle()
 			switch (selection)
 			{
 			case 1:
-				targetIdx = randomRange(0, enemySize);
+				//targetIdx = randomRange(0, enemySize);
 
-				//while (true)	// Attack Menu; Will be automated.
-				//{
-				//	cout << "===== Attack =====\n" << endl;
-				//	cout << "--- Enemies : " << enemySize << " left ---" << endl;
+				while (true)	// Attack Menu; Will be automated.
+				{
+					/*cout << "===== Attack =====\n" << endl;
+					cout << "--- Enemies : " << enemySize << " left ---" << endl;
 
-				//	for (int i = 0; i < enemySize; i++)
-				//	{
-				//		cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
-				//	}
+					for (int i = 0; i < enemySize; i++)
+					{
+						cout << i + 1 << " - " << enemy.at(i)->getName() << " | HP : " << enemy[i]->getHealth() << "\n" << endl;
+					}*/
 
-				//	cout << "select Target : ";
+					cout << "select Target : ";
 
-				//	cin >> targetIdx;
+					cin >> targetIdx;
 
-				//	system("cls");
+					system("cls");
 
-				//	if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
-				//	{
-				//		cout << " invalid input." << endl;
-				//		cin.clear();
-				//		cin.ignore(10000, '\n');
-				//	}
+					if (cin.fail() || (targetIdx <= 0 || targetIdx > enemySize))
+					{
+						cout << " invalid input." << endl;
+						cin.clear();
+						cin.ignore(10000, '\n');
+					}
 
-				//	else
-				//	{
-				//		break;
-				//	}
-				//}	// Attack Menu end
+					else
+					{
+						break;
+					}
+				}	// Attack Menu end
 
-				//targetIdx -= 1;
+				targetIdx -= 1;
 
 			attack(enemy[targetIdx]);
 
-			if (enemySize <= 1) 
+			if (enemy.at(targetIdx)->getHealth() <= 0)
+			{
+				cout << "===== Attack =====\n" << endl;
+				cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
+
+				logKill(enemy[targetIdx]);
+
+				earnedXP += enemy[targetIdx]->getDropExp();
+				earnedGold += enemy[targetIdx]->getDropGold();
+				Item* dropItem = enemy[targetIdx]->dropItem();
+				if (dropItem != nullptr)
+				{
+					cout << enemy[targetIdx]->getName() << " dropped a " << dropItem->getName() << "!\n" << endl;
+					player->addItem(dropItem);
+				}
+
+				delete enemy.at(targetIdx);
+				enemy[targetIdx] = nullptr;
+
+				enemy.erase(enemy.begin() + targetIdx);
+
+				system("pause");
+				system("cls");
+			}
+			else
+			{
+				beingAttacked(enemy[targetIdx]);
+			}
+			/*if (enemySize <= 1) 
 			{
 				beingAttacked(enemy.at(0));
 			}
@@ -185,7 +215,7 @@ void GameManager::battle()
 			else 
 			{
 				beingAttacked(enemy[targetIdx]);
-			}
+			}*/
 
 			player->advanceTurn();
 
@@ -233,15 +263,7 @@ void GameManager::battle()
 					{
 						vector<Item*> inv = player->getInventory();
 
-						if (dynamic_cast<HealthPotion*> (inv[itemIdx]))
-						{
-							inv[itemIdx]->Use(player);
-						}
-
-						else if (dynamic_cast<AttackBoost*> (inv[itemIdx]))
-						{
-							inv[itemIdx]->Use(player);
-						}
+						inv[itemIdx]->Use(player);
 						
 						player->removeItem(++itemIdx);
 
@@ -256,7 +278,7 @@ void GameManager::battle()
 			}
 		}
 
-		if(enemy.at(targetIdx)->getHealth() <= 0)
+		/*if(enemy.at(targetIdx)->getHealth() <= 0)
 		{
 			cout << "===== Attack =====\n" << endl;
 			cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
@@ -273,7 +295,7 @@ void GameManager::battle()
 
 			system("pause");
 			system("cls");
-		}
+		}*/
 
 		if(enemy.empty()) /* Winning condition. */
 		{
@@ -282,7 +304,6 @@ void GameManager::battle()
 
 			player->addGold(earnedGold);
 			player->addExp(earnedXP);
-
 			cout << "You have earned " << earnedXP << " XP, " << earnedGold << " Golds.\n" << endl;
 
 			if (player->canLevelUp()) 
@@ -541,7 +562,7 @@ void callShopMenu(GameManager& game, Shop& shop)
 	while (true)
 	{
 		cout << "===== Shop =====\n" << endl;
-		shop.displayItems();
+		//shop.displayItems();
 		cout << "\n1. Buy Item" << endl;
 		cout << "2. Sell Item" << endl;
 		cout << "3. Return\n" << endl;
