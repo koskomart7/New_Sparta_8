@@ -13,7 +13,7 @@ Character::Character(const string& characterName)
 
 Character::~Character()
 {
-    for (auto* item : inventory)
+    for (Item* item : inventory)
     {
         delete item;
     }
