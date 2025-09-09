@@ -64,26 +64,28 @@ public:
     void setGold(int newGold);
     
     // 함수
-    //void displayStatus() const;
-    bool isAlive() const { return currentHealth > 0; }
-
+    
+    // 경험치 관련 함수들
     void addExp(int amount) { exp += amount; }
     bool canLevelUp() const { return exp >= EXP_FOR_LEVELUP && level < MAX_LEVEL; }
     void levelUp(); 
 
+    //기본 캐릭터 함수들
+    bool isAlive() const { return currentHealth > 0; }
     void takeDamage(int damage);
     void heal(int amount); 
-    //int dealDamage() const { return attack; }
+   
     
     // 버프관련
     void advanceTurn(); // 턴이 끝날 때마다 호출
     void dealBuffCalc(int buffAmount, int buffTurns);       // 딜버프 물약 효과 검증 및 계산 함수 
     bool hasActiveBuff() const;
 
+    // 골드관련
     void addGold(int amount) { gold += amount; }
     bool spendGold(int amount);  
-
     
+    // 인벤토리 관련
     void addItem(Item* item);   // remove Item 추가 구현 
     bool removeItem(size_t index); // 인벤토리에서 지정 인덱스의 아이템 삭제
     bool hasItems() const       // 인벤토리가 비었는지 유무 확인 함수 

@@ -131,33 +131,52 @@ void Character::setGold(int newGold)
 }
 
 // Function
-void Character::levelUp()
+void Character::levelUp()           // 다중 레벨 추가 구현
 {
     if (!canLevelUp())
     {
         return;
     }
 
-    exp -= EXP_FOR_LEVELUP;
-    level++;
+    int startLevel = level;
+    int levelsGained = 0;
     
     //only for printing 
     int oldMaxHealth = maxHealth;
     int oldAttack = attack;
 
-    updateAttack();
-    updateMaxHealth();
+    while (canLevelUp())
+    {
+        exp -= EXP_FOR_LEVELUP;
+        level++;
+        levelsGained++;
+        // 스탯 업데이트 
+        updateAttack();
+        updateMaxHealth();
+    }
+    
     // Full recovery of HP
     currentHealth = maxHealth;
-
-    cout << "=======================================" << endl;
-    cout << "\n Level UP! " << name << " This level " << level << "has been reached!" << endl;
-    cout << " Maximum Health: " << oldMaxHealth << " → " << maxHealth
-        << " (+" << (maxHealth - oldMaxHealth) << ")" << endl;
-    cout << " Attack Power : " << oldAttack << " → " << attack
-        << " (+" << (attack - oldAttack) << ")" << endl;
-    cout << " Your stamina has been fully restored!! " << endl;
-    cout << "=======================================" << endl;
+    if (levelsGained > 0)
+    {
+        cout << "=======================================" << endl;
+        if (levelsGained == 1)
+        {
+            cout << "\n Level UP! " << name << " This level " << level << " has been reached!" << endl;
+        }
+        else
+        {
+            cout << "\n MULTIPLE LEVEL UP! " << name << " gained " << levelsGained
+                << " levels! (" << startLevel << " -> " << level << ")" << endl;
+        }
+        cout << " Maximum Health: " << oldMaxHealth << " → " << maxHealth
+            << " (+" << (maxHealth - oldMaxHealth) << ")" << endl;
+        cout << " Attack Power : " << oldAttack << " → " << attack
+            << " (+" << (attack - oldAttack) << ")" << endl;
+        cout << " Now Exp : " << exp << endl;
+        cout << " Your stamina has been fully restored!! " << endl;
+        cout << "=======================================" << endl;
+    }
 }
 
 void Character::updateMaxHealth()
