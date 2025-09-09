@@ -91,7 +91,7 @@ public:
         return !inventory.empty();
     }
     //void displayInventory() const;
-    bool useRandomItem();  //
+    //bool useRandomItem();  //
     bool sellItem(int index, vector<Item*> Inventory) {};  // Modified with a parameter vector inventory
 
   
