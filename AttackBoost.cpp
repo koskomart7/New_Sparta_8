@@ -38,6 +38,7 @@ void AttackBoost::Use(Character* character)
 {
 	if (character != nullptr)
 	{
+		cout << "Player use - " << name << " - !\n" << endl;
 		character->dealBuffCalc(attackIncrease, duration);
 	}
 }

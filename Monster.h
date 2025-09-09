@@ -32,4 +32,5 @@ public:
 
 	void takeDamage(int damage);
 	virtual Item* dropItem() = 0;
+	void displayStats();
 };

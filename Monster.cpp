@@ -1,5 +1,6 @@
 #include "Monster.h"
 #include "Item.h"
+#include <iostream>
 
 Monster::Monster()
 {
@@ -72,4 +73,9 @@ void Monster::takeDamage(int damage)
 		return;
 	}
 	health -= damage;
+}
+
+void Monster::displayStats()
+{
+	cout << name << " - attack : " << attack << ", health : " << health << endl;
 }
