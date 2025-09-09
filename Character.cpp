@@ -151,12 +151,12 @@ void Character::levelUp()
     currentHealth = maxHealth;
 
     cout << "=======================================" << endl;
-    cout << "\n Level UP! " << name << "This level " << level << "has been reached!" << endl;
-    cout << "Maximum Health: " << oldMaxHealth << " → " << maxHealth
+    cout << "\n Level UP! " << name << " This level " << level << "has been reached!" << endl;
+    cout << " Maximum Health: " << oldMaxHealth << " → " << maxHealth
         << " (+" << (maxHealth - oldMaxHealth) << ")" << endl;
-    cout << "Attack Power : " << oldAttack << " → " << attack
+    cout << " Attack Power : " << oldAttack << " → " << attack
         << " (+" << (attack - oldAttack) << ")" << endl;
-    cout << "Your stamina has been fully restored!!" << endl;
+    cout << " Your stamina has been fully restored!! " << endl;
     cout << "=======================================" << endl;
 }
 
@@ -255,9 +255,10 @@ bool Character::removeItem(size_t index)
         return false;
     }
     delete inventory[index-1];
+    inventory[index - 1] = nullptr;
     inventory.erase(inventory.begin() + index-1);
 
-    cout << "[LOG] 인벤토리에서 아이템" << index << "번이 삭제되었습니다." << endl;
+    //cout << "[LOG] 인벤토리에서 아이템" << index << "번이 삭제되었습니다." << endl;
 
     return true;
 }
