@@ -1,14 +1,18 @@
 #pragma once
 
-#include "Monster.h"
-#include "Character.h"
+#include <vector>
 
 class Shop;
+
+class Monster;
+
+class Character;
 
 class GameManager {
 private:
 	Character* player;
-	vector<int> killLogs;
+	std::vector<int> killLogs;
+	bool isBossKilled;
 
 public:
 	GameManager(Character*);
@@ -34,6 +38,8 @@ public:
 	void shoppingSell(int, Shop&);
 
 	void logKill(Monster*);
+
+	inline bool isBossKill() const { return this->isBossKilled; };
 };
 
 Character* characterCreation();

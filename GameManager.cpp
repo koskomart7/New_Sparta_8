@@ -92,10 +92,12 @@ void GameManager::battle()
 	int targetIdx = 0, enemySize = 0, earnedXP = 0, earnedGold = 0;
 	int turns = 1;
 	int selection;
+	bool isBossBattle = false;
 	vector<Monster*> enemy;
 
 	if (player->getLevel() >= 10) {
 		enemy.push_back(spawnBoss());
+		isBossBattle = true;
 	}
 
 	else
@@ -307,6 +309,20 @@ void GameManager::battle()
 		{
 			cout << "===== Battle Result ===== \n" << endl;
 			cout << "You have won the battle!" << endl;
+
+			if (isBossBattle)
+			{
+				isBossKilled = true;
+
+				cout << "\n=======================" << endl;
+				cout << "***** Game Clear! *****" << endl;
+				cout << "=======================\n" << endl;
+				
+				system("pause");
+				system("cls");
+
+				break;
+			}
 
 			player->addGold(earnedGold);
 			player->addExp(earnedXP);

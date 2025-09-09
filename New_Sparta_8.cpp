@@ -34,5 +34,11 @@ int main()
         default:
             break;
         }
+
+        if (game.isBossKill())
+        {
+            cout << "===* You have cleared the game! *===\n Thank you for playing!\n" << endl;
+            return 0;
+        }
     }
 }
