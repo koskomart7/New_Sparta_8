@@ -16,10 +16,10 @@ private:
 
 public:
     Shop();
+	~Shop();
 
-    void displayItems() const;
 
+    void displayItems(int sell = 100) const;
     void buyItem(int index, Character* player);
-
     int sellItem(int index, Character* player);
 };
