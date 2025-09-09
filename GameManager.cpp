@@ -23,6 +23,7 @@ using namespace std;
 GameManager::GameManager(Character* newPlayer) : player(newPlayer) 
 {
 	killLogs.assign(3, 0);
+	isBossKilled = false;
 };
 
 GameManager::~GameManager() 
