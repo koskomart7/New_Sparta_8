@@ -219,10 +219,10 @@ void GameManager::battle()
 
 					if (itemIdx == -1)
 					{
-						continue;
+						break;
 					}
 
-					if (cin.fail() || (itemIdx < -1 || itemIdx > player->getInventorySize()))
+					if (cin.fail() || (itemIdx + 1 < 0 || itemIdx + 1 > player->getInventorySize()))
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
