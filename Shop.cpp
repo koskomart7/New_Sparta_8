@@ -13,12 +13,23 @@ Shop::Shop()
 	stock_.push_back(new AttackBoost());
 }
 
-void Shop::displayItems() const
+Shop::~Shop()
+{
+    for (auto item : stock_) 
+    {
+        delete item;
+		item = nullptr;
+    }
+    stock_.clear();
+}
+
+void Shop::displayItems(int sell) const
 {
     for (int i = 0; i < stock_.size(); i++)
     {
 		cout << i+1 << ". - " << stock_[i]->getName() << " - "
-             << stock_[i]->getPrice() << "Gold\n" << endl;
+            << stock_[i]->getPrice() * ((float)sell / 100) << "Gold\n" << endl;
+     
     }
 }
 
