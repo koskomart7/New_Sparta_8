@@ -27,6 +27,7 @@ void HealthPotion::Use(Character* character)
 {
 	if (character != nullptr)
 	{
+		cout << "Player use - " << name << " - !\n" << endl;
 		character->heal(healthRestore);
 	}
 }
