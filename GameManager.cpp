@@ -23,7 +23,6 @@ using namespace std;
 GameManager::GameManager(Character* newPlayer) : player(newPlayer) 
 {
 	killLogs.assign(3, 0);
-	playLogs.assign(2, 0);
 };
 
 GameManager::~GameManager() 
@@ -189,6 +188,7 @@ void GameManager::battle()
 				earnedXP += enemy[targetIdx]->getDropExp();
 				earnedGold += enemy[targetIdx]->getDropGold();
 				Item* dropItem = enemy[targetIdx]->dropItem();
+
 				if (dropItem != nullptr)
 				{
 					cout << enemy[targetIdx]->getName() << " dropped a " << dropItem->getName() << "!\n" << endl;
@@ -203,10 +203,12 @@ void GameManager::battle()
 				system("pause");
 				system("cls");
 			}
+
 			else
 			{
 				beingAttacked(enemy[targetIdx]);
 			}
+
 			/*if (enemySize <= 1) 
 			{
 				beingAttacked(enemy.at(0));

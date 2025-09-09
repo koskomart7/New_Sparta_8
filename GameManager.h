@@ -9,7 +9,6 @@ class GameManager {
 private:
 	Character* player;
 	vector<int> killLogs;
-	vector<int> playLogs;
 
 public:
 	GameManager(Character*);
