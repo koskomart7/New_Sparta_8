@@ -4,19 +4,14 @@
 
 #include "rangeRd.h"
 #include "GameManager.h"
-
-#include "Item.h"
-#include "HealthPotion.h"
-#include "AttackBoost.h"
+#include "MonsterManager.h"
 
 #include "Shop.h"
+#include "Item.h"
+
 #include "Character.h"
 
 #include "Monster.h"
-#include "BossMonster.h"
-#include "Goblin.h"
-#include "Troll.h"
-#include "Orc.h"
 
 using namespace std;
 
@@ -31,62 +26,6 @@ GameManager::~GameManager()
 	delete this->player;
 	this->player = nullptr;
 };
-
-Monster* GameManager::spawnMonsters()
-{
-	Monster* monster = nullptr;
-	int enemyLv = 0;
-
-	if (player->getLevel() <= 2) 
-	{
-		enemyLv = player->getLevel() +randomRange(0, 2);
-	}
-
-	else
-	{
-		enemyLv = player->getLevel() +randomRange(-3, 3);
-	}
-
-	while (!monster)
-	{
-		switch (randomRange(1,4))
-		{
-		case 1:
-			// create goblin
-			monster = new Goblin(enemyLv);
-			break;
-
-		case 2:
-			// create Orc
-			monster = new Orc(enemyLv);
-			break;
-
-		case 3:
-			// create Troll
-			monster = new Troll(enemyLv);
-			break;
-
-		default:
-			break;
-		}
-	}
-	return monster;
-}
-
-Monster* GameManager::spawnBoss()
-{
-	Monster* boss = new BossMonster(12);
-
-	cout << endl;
-	cout << "\n===== WARNING =====" << endl;
-	cout << "Entering Boss Battle!" << endl;
-	cout << "===================\n" << endl;
-	
-	system("pause");
-	system("cls");
-
-	return boss;
-}
 
 void GameManager::battle() 
 {
@@ -105,7 +44,7 @@ void GameManager::battle()
 	{
 		for (int i = 0; i < randomRange(1, 4); i++)
 		{
-			enemy.push_back(spawnMonsters());
+			enemy.push_back(spawnMonster(player->getLevel()));
 		}
 	}
 
@@ -183,54 +122,54 @@ void GameManager::battle()
 
 				//targetIdx -= 1;
 
-			attack(enemy[targetIdx]);
+				attack(enemy[targetIdx]);
 
-			if (enemy.at(targetIdx)->getHealth() <= 0)
-			{
-				cout << "===== Attack =====\n" << endl;
-				cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
-
-				logKill(enemy[targetIdx]);
-
-				earnedXP += enemy[targetIdx]->getDropExp();
-				earnedGold += enemy[targetIdx]->getDropGold();
-				Item* dropItem = enemy[targetIdx]->dropItem();
-
-				if (dropItem != nullptr)
+				if (enemy.at(targetIdx)->getHealth() <= 0)
 				{
-					cout << enemy[targetIdx]->getName() << " dropped a " << dropItem->getName() << "!\n" << endl;
-					player->addItem(dropItem);
+					cout << "===== Attack =====\n" << endl;
+					cout << "You have killed " << enemy[targetIdx]->getName() << "!\n" << endl;
+
+					logKill(enemy[targetIdx]);
+
+					earnedXP += enemy[targetIdx]->getDropExp();
+					earnedGold += enemy[targetIdx]->getDropGold();
+					Item* dropItem = enemy[targetIdx]->dropItem();
+
+					if (dropItem != nullptr)
+					{
+						cout << enemy[targetIdx]->getName() << " dropped a " << dropItem->getName() << "!\n" << endl;
+						player->addItem(dropItem);
+					}
+
+					delete enemy.at(targetIdx);
+					enemy[targetIdx] = nullptr;
+
+					enemy.erase(enemy.begin() + targetIdx);
+
+					system("pause");
+					system("cls");
 				}
 
-				delete enemy.at(targetIdx);
-				enemy[targetIdx] = nullptr;
+				else
+				{
+					beingAttacked(enemy[targetIdx]);
+				}
 
-				enemy.erase(enemy.begin() + targetIdx);
-
-				system("pause");
-				system("cls");
-			}
-
-			else
-			{
-				beingAttacked(enemy[targetIdx]);
-			}
-
-			/*if (enemySize <= 1) 
-			{
-				beingAttacked(enemy.at(0));
-			}
+				/*if (enemySize <= 1) 
+				{
+					beingAttacked(enemy.at(0));
+				}
 				
-			else 
-			{
-				beingAttacked(enemy[targetIdx]);
-			}*/
+				else 
+				{
+					beingAttacked(enemy[targetIdx]);
+				}*/
 
-			player->advanceTurn();
+				player->advanceTurn();
 
-			++turns;
+				++turns;
 
-			break;
+				break;
 
 			case 2:
 			{
@@ -449,20 +388,7 @@ void GameManager::shoppingSell(int idx, Shop& shop)
 
 void GameManager::logKill(Monster* target)
 {
-	if (dynamic_cast<Goblin*>(target))
-	{
-		++killLogs[0];
-	}
-
-	else if (dynamic_cast<Orc*>(target))
-	{
-		++killLogs[1];
-	}
-
-	else if (dynamic_cast<Troll*>(target))
-	{
-		++killLogs[2];
-	}
+	++killLogs[monsterType(target)];
 }
 
 Character* characterCreation() 
@@ -621,22 +547,21 @@ void callShopMenu(GameManager& game, Shop& shop)
 
 					system("cls");
 
-					if (selection == 0)
-					{
-						break;
-					}
-
-					else if (cin.fail())
+					if (cin.fail())
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
 						cin.ignore(10000, '\n');
 					}
 
+					else if (selection == 0)
+					{
+						break;
+					}
+
 					else
 					{
 						game.shoppingBuy(selection, shop);
-						break;
 					}
 				}
 				break;
@@ -657,27 +582,25 @@ void callShopMenu(GameManager& game, Shop& shop)
 
 					system("cls");
 
-					if (selection == 0)
-					{
-						break;
-					}
-
-					else if (cin.fail())
+					if (cin.fail())
 					{
 						cout << " invalid input." << endl;
 						cin.clear();
 						cin.ignore(10000, '\n');
 					}
 
+					else if (selection == 0)
+					{
+						break;
+					}
+
 					else
 					{
 						game.shoppingSell(selection, shop);
-						break;
 					}
 				}
 				break;
 			}
-				break;
 			default:
 				break;
 			}

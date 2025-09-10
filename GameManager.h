@@ -19,10 +19,6 @@ public:
 
 	~GameManager();
 
-	Monster* spawnMonsters();
-
-	Monster* spawnBoss();
-
 	void battle();
 
 	void attack(Monster*);
